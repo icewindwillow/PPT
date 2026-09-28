@@ -76,6 +76,15 @@
     .card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
     .card .icon { display: block; color: var(--copper); font-size: 24px; margin-bottom: 15px; }
     .result-line { min-height: 34px; margin-top: 23px; color: var(--copper-soft); font: italic 19px Georgia, serif; }
+    .manuscript { margin-top: 28px; max-width: 960px; border: 1px solid rgba(213,139,82,.36); border-radius: 15px; background: linear-gradient(135deg, rgba(213,139,82,.09), rgba(255,255,255,.02)); overflow: hidden; }
+    .manuscript-head { display: flex; justify-content: space-between; gap: 14px; padding: 13px 18px; border-bottom: 1px solid var(--line); color: var(--copper-soft); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+    .manuscript-body { padding: 20px 22px 22px; background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 31px); }
+    .manuscript-intro { margin: 0 0 16px; color: #c5cfce; font: italic 17px/1.45 Georgia, serif; }
+    .folio-line { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.1); animation: enter .45s ease both; }
+    .folio-line::before { content: "✦"; color: var(--copper); padding-top: 2px; }
+    .folio-line strong { display: block; margin-bottom: 3px; color: #f0c28e; font: 500 16px Georgia, serif; }
+    .folio-line span { color: #aebbbc; font: 14px/1.5 Georgia, serif; }
+    .folio-empty { margin: 0; color: var(--muted); font-size: 13px; }
     .choice-row { display: flex; flex-wrap: wrap; gap: 9px; margin: 23px 0; }
     .choice { border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 999px; padding: 10px 14px; color: var(--muted); cursor: pointer; transition: .2s ease; }
     .choice:hover, .choice.selected { border-color: var(--copper); color: var(--copper-soft); background: rgba(213, 139, 82, .1); }
@@ -205,7 +214,6 @@
 
     function nav() {
       sceneList.innerHTML = scenes.map((s, i) => `<button class="scene-btn ${i === current ? 'active' : ''}" data-go="${i}"><small>${String(i).padStart(2, '0')}</small><span>${s.short}</span></button>`).join('');
-      sceneList.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => go(Number(btn.dataset.go))));
       progressBar.style.width = `${((current + 1) / scenes.length) * 100}%`;
     }
     function shell(inner, cls = '') {
@@ -216,9 +224,16 @@
       const s = scenes[current];
       let html = '';
       if (s.key === 'entry') html = shell(`<div class="content"><div class="eyebrow">${s.label} · Aphra Behn's Oroonoko</div><h2>Through the <em>Traveller's Eye</em></h2><p class="hero-copy">A visual reading of witnessing, describing, and representing a colonial world.</p><p class="hero-question">Who gets to describe the world—and whose account becomes history?</p><div class="hero-actions"><button class="solid-btn" data-next>Enter the manuscript <span aria-hidden="true">→</span></button><span class="microcopy">8 scenes · keyboard ready</span></div></div>`, 'hero-scene');
-      if (s.key === 'conditions') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">How did travel become <em>knowledge?</em></h2><p class="lede">Eighteenth-century travel writing flourished when four cultural shifts began to reinforce one another. Activate each thread and watch the manuscript fill in.</p><div class="grid-4">${[
-        ['◌', 'Experience', 'Empiricism gave travel a new intellectual status.'], ['↗', 'Expansion', 'Colonial and maritime contact fed a public appetite for accounts.'], ['▤', 'Education', 'The Grand Tour made journals, letters, and memoirs part of learning.'], ['⟲', 'Literary exchange', 'Travel narrative and the early novel borrowed from each other.']
-      ].map((x, i) => `<button class="card ${state.conditions.has(i) ? 'selected' : ''}" data-condition="${i}"><span class="icon">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></button>`).join('')}</div><div class="result-line">${state.conditions.size === 4 ? 'Travel became a way of producing knowledge.' : `${state.conditions.size} of 4 threads activated`}</div></div>`);
+      if (s.key === 'conditions') {
+        const threads = [
+          ['◌', 'Experience', 'Empiricism gave travel a new intellectual status.', 'Locke’s tabula-rasa theory made lived sensation a source of knowledge. Travel could become a disciplined way of learning.'],
+          ['↗', 'Expansion', 'Colonial and maritime contact fed a public appetite for accounts.', 'Overseas encounters created a sustained demand for descriptions of unfamiliar peoples, places, and customs.'],
+          ['▤', 'Education', 'The Grand Tour made journals, letters, and memoirs part of learning.', 'Travel records became part of an elite educational ritual, then reached wider audiences through the picturesque.'],
+          ['⟲', 'Literary exchange', 'Travel narrative and the early novel borrowed from each other.', 'First-person voice, empirical detail, and movement through time and place crossed the boundary between fact and fiction.']
+        ];
+        const opened = threads.filter((_, i) => state.conditions.has(i));
+        html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">How did travel become <em>knowledge?</em></h2><p class="lede">Eighteenth-century travel writing flourished when four cultural shifts began to reinforce one another. Activate each thread and watch the manuscript fill in.</p><div class="grid-4">${threads.map((x, i) => `<button class="card ${state.conditions.has(i) ? 'selected' : ''}" data-condition="${i}" aria-pressed="${state.conditions.has(i)}"><span class="icon">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></button>`).join('')}</div><div class="result-line">${state.conditions.size === 4 ? 'The folio is complete: travel became a way of producing knowledge.' : `${state.conditions.size} of 4 threads opened · click another card to continue`}</div><div class="manuscript"><div class="manuscript-head"><span>Manuscript folio</span><span>${opened.length} / 4 passages opened</span></div><div class="manuscript-body"><p class="manuscript-intro">${opened.length ? 'Each activated thread adds a line to the historical record.' : 'The page is waiting. Click a thread above to add its account.'}</p>${opened.length ? opened.map(x => `<div class="folio-line"><div><strong>${x[1]}</strong><span>${x[3]}</span></div></div>`).join('') : '<p class="folio-empty">No passage has been opened yet.</p>'}</div></div></div>`);
+      }
       if (s.key === 'boundaries') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Where does a <em>genre</em> begin?</h2><p class="lede">The boundary between travel narrative and fiction is porous. Place each technique where it seems to belong—then see why the categories overlap.</p><div class="choice-row">${['First-person narration', 'Eyewitness claims', 'Detailed description', 'Movement through places'].map((x, i) => `<button class="choice ${state.boundaries.has(i) ? 'selected' : ''}" data-boundary="${i}">${x}</button>`).join('')}</div><div class="frames"><div class="frame ${state.boundaries.size >= 2 ? 'active' : ''}"><h3>Documentary record</h3><p>Observation, evidence, sequence. A promise that the world has been encountered.</p></div><div class="frame ${state.boundaries.size >= 2 ? 'active' : ''}"><h3>Travel narrative / fiction</h3><p>Voice, movement, scene. A promise that the account can be shaped into a story.</p></div></div><div class="quote-panel"><blockquote>Instead of asking what travel writing is, ask what it does.</blockquote><cite>A characteristic-based approach · after Borm, Hulme & Youngs, Thompson, and Pratt</cite></div></div>`);
       if (s.key === 'authority') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Who gets to be a <em>witness?</em></h2><p class="lede">In Oroonoko, the narrator’s “I” works as an authority marker. Select a link in the chain to see how credibility is staged.</p><div class="chain">${[['presence', 'Being there', 'on-site presence'], ['testimony', 'Claiming truth', 'firsthand observation'], ['archive', 'Preserving a story', 'a history left out']].map(x => `<button class="chain-step ${state.authority === x[0] ? 'active' : ''}" data-authority="${x[0]}"><strong>${x[1]}</strong><small>${x[2]}</small></button>`).join('')}</div><div class="quote-panel"><blockquote>${state.authority === 'archive' ? '“only a female pen”' : state.authority === 'testimony' ? '“Truth” rather than fabricated adventures' : 'The narrator’s physical presence in Surinam'}</blockquote><cite>${state.authority === 'archive' ? 'A modest phrase with a double edge.' : state.authority === 'testimony' ? 'A claim that sounds like travel-writing authority.' : 'Presence becomes proof.'}</cite></div><div class="tension"><div><strong>A constraint</strong>Female authorship can appear to weaken authority within a male-centred literary culture.</div><div><strong>A resource</strong>That same position lets Behn preserve a story missing from official history.</div></div></div>`);
       if (s.key === 'description') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">When a landscape becomes <em>knowledge</em></h2><p class="lede">Observe, describe, classify. The sequence makes visible how a foreign environment is translated into an intelligible account.</p><div class="observe-stage"><div class="landscape ${state.description === 'observe' ? 'observing' : ''} ${state.description === 'classify' ? 'classified' : ''}" aria-label="Stylized Surinam landscape"><span class="tag one">flora</span><span class="tag two">local custom</span><span class="tag three">natural resource</span></div><div class="step-copy"><h3>${state.description === 'observe' ? 'Look closely.' : state.description === 'describe' ? 'Put experience into words.' : 'Turn details into a system.'}</h3><p>${state.description === 'observe' ? 'The scene is still a scene. Nothing has been sorted yet.' : state.description === 'describe' ? 'Description creates the impression of direct, empirical witness.' : 'Classification makes unfamiliar space legible—but never free from the observer’s frame.'}</p><div class="choice-row"><button class="choice ${state.description === 'observe' ? 'selected' : ''}" data-description="observe">Observe</button><button class="choice ${state.description === 'describe' ? 'selected' : ''}" data-description="describe">Describe</button><button class="choice ${state.description === 'classify' ? 'selected' : ''}" data-description="classify">Classify</button></div></div></div><div class="quote-panel"><blockquote>${state.description === 'classify' ? '“Not all the Gardens of boasted Italy can produce a Shade to out-vie this”' : '“about half the length of the Mall here”'}</blockquote><cite>European reference points give Surinam a readable scale.</cite></div></div>`);
@@ -229,16 +244,20 @@
       nav();
       bindScene();
     }
-    function bindScene() {
-      stage.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => go(current + 1)));
-      stage.querySelectorAll('[data-condition]').forEach(b => b.addEventListener('click', () => { const i = Number(b.dataset.condition); state.conditions.has(i) ? state.conditions.delete(i) : state.conditions.add(i); render(); }));
-      stage.querySelectorAll('[data-boundary]').forEach(b => b.addEventListener('click', () => { const i = Number(b.dataset.boundary); state.boundaries.has(i) ? state.boundaries.delete(i) : state.boundaries.add(i); render(); }));
-      stage.querySelectorAll('[data-authority]').forEach(b => b.addEventListener('click', () => { state.authority = b.dataset.authority; render(); }));
-      stage.querySelectorAll('[data-description]').forEach(b => b.addEventListener('click', () => { state.description = b.dataset.description; render(); }));
-      stage.querySelectorAll('[data-reverse]').forEach(b => b.addEventListener('click', () => { state.reversed = !state.reversed; render(); }));
-      stage.querySelectorAll('[data-position]').forEach(b => b.addEventListener('click', () => { const key = b.dataset.position; state.position.has(key) ? state.position.delete(key) : state.position.add(key); render(); }));
-      stage.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(Number(b.dataset.go))));
-    }
+    function bindScene() {}
+    sceneList.addEventListener('click', event => { const button = event.target.closest('[data-go]'); if (button) go(Number(button.dataset.go)); });
+    stage.addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (!button) return;
+      if (button.hasAttribute('data-next')) return go(current + 1);
+      if (button.hasAttribute('data-go')) return go(Number(button.dataset.go));
+      if (button.hasAttribute('data-condition')) { const i = Number(button.dataset.condition); state.conditions.has(i) ? state.conditions.delete(i) : state.conditions.add(i); return render(); }
+      if (button.hasAttribute('data-boundary')) { const i = Number(button.dataset.boundary); state.boundaries.has(i) ? state.boundaries.delete(i) : state.boundaries.add(i); return render(); }
+      if (button.hasAttribute('data-authority')) { state.authority = button.dataset.authority; return render(); }
+      if (button.hasAttribute('data-description')) { state.description = button.dataset.description; return render(); }
+      if (button.hasAttribute('data-reverse')) { state.reversed = !state.reversed; return render(); }
+      if (button.hasAttribute('data-position')) { const key = button.dataset.position; state.position.has(key) ? state.position.delete(key) : state.position.add(key); return render(); }
+    });
     function go(index) { current = Math.max(0, Math.min(scenes.length - 1, index)); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); stage.focus({ preventScroll: true }); closeEvidence(); }
     function openEvidence() { const s = scenes[current]; evidenceTitle.textContent = `${s.label} · Evidence layer`; evidenceText.textContent = s.evidence; evidenceDrawer.classList.add('open'); }
     function closeEvidence() { evidenceDrawer.classList.remove('open'); }
