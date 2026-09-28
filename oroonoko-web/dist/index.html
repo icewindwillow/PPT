@@ -216,11 +216,13 @@
       sceneList.innerHTML = scenes.map((s, i) => `<button class="scene-btn ${i === current ? 'active' : ''}" data-go="${i}"><small>${String(i).padStart(2, '0')}</small><span>${s.short}</span></button>`).join('');
       progressBar.style.width = `${((current + 1) / scenes.length) * 100}%`;
     }
+    let shouldAnimate = true;
     function shell(inner, cls = '') {
       const s = scenes[current];
-      return `<section class="scene ${cls}" data-key="${s.key}"><div class="section-inner enter">${inner}</div></section>`;
+      return `<section class="scene ${cls}" data-key="${s.key}"><div class="section-inner ${shouldAnimate ? 'enter' : ''}">${inner}</div></section>`;
     }
-    function render() {
+    function render(animate = true) {
+      shouldAnimate = animate;
       const s = scenes[current];
       let html = '';
       if (s.key === 'entry') html = shell(`<div class="content"><div class="eyebrow">${s.label} · Aphra Behn's Oroonoko</div><h2>Through the <em>Traveller's Eye</em></h2><p class="hero-copy">A visual reading of witnessing, describing, and representing a colonial world.</p><p class="hero-question">Who gets to describe the world—and whose account becomes history?</p><div class="hero-actions"><button class="solid-btn" data-next>Enter the manuscript <span aria-hidden="true">→</span></button><span class="microcopy">8 scenes · keyboard ready</span></div></div>`, 'hero-scene');
@@ -251,12 +253,12 @@
       if (!button) return;
       if (button.hasAttribute('data-next')) return go(current + 1);
       if (button.hasAttribute('data-go')) return go(Number(button.dataset.go));
-      if (button.hasAttribute('data-condition')) { const i = Number(button.dataset.condition); state.conditions.has(i) ? state.conditions.delete(i) : state.conditions.add(i); return render(); }
-      if (button.hasAttribute('data-boundary')) { const i = Number(button.dataset.boundary); state.boundaries.has(i) ? state.boundaries.delete(i) : state.boundaries.add(i); return render(); }
-      if (button.hasAttribute('data-authority')) { state.authority = button.dataset.authority; return render(); }
-      if (button.hasAttribute('data-description')) { state.description = button.dataset.description; return render(); }
-      if (button.hasAttribute('data-reverse')) { state.reversed = !state.reversed; return render(); }
-      if (button.hasAttribute('data-position')) { const key = button.dataset.position; state.position.has(key) ? state.position.delete(key) : state.position.add(key); return render(); }
+      if (button.hasAttribute('data-condition')) { const i = Number(button.dataset.condition); state.conditions.has(i) ? state.conditions.delete(i) : state.conditions.add(i); return render(false); }
+      if (button.hasAttribute('data-boundary')) { const i = Number(button.dataset.boundary); state.boundaries.has(i) ? state.boundaries.delete(i) : state.boundaries.add(i); return render(false); }
+      if (button.hasAttribute('data-authority')) { state.authority = button.dataset.authority; return render(false); }
+      if (button.hasAttribute('data-description')) { state.description = button.dataset.description; return render(false); }
+      if (button.hasAttribute('data-reverse')) { state.reversed = !state.reversed; return render(false); }
+      if (button.hasAttribute('data-position')) { const key = button.dataset.position; state.position.has(key) ? state.position.delete(key) : state.position.add(key); return render(false); }
     });
     function go(index) { current = Math.max(0, Math.min(scenes.length - 1, index)); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); stage.focus({ preventScroll: true }); closeEvidence(); }
     function openEvidence() { const s = scenes[current]; evidenceTitle.textContent = `${s.label} · Evidence layer`; evidenceText.textContent = s.evidence; evidenceDrawer.classList.add('open'); }
