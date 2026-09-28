@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="An interactive literary presentation on travel writing in Aphra Behn's Oroonoko." />
+  <title>Oroonoko: Through the Traveller's Eye</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1220'/%3E%3Cpath d='M16 43c12-9 22-14 32-26M16 43c9 3 19 4 32-1' stroke='%23d58b52' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='43' r='4' fill='%23d58b52'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ink: #eef1ec;
+      --muted: #a4afb4;
+      --deep: #08111d;
+      --deep-2: #0d1c2a;
+      --panel: rgba(17, 32, 46, .78);
+      --panel-strong: rgba(21, 40, 56, .94);
+      --copper: #d58b52;
+      --copper-soft: #f0b678;
+      --green: #6ea080;
+      --red: #e17d64;
+      --line: rgba(225, 229, 220, .14);
+      --shadow: 0 24px 80px rgba(0,0,0,.3);
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--deep); scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; color: var(--ink); background: radial-gradient(circle at 75% 12%, rgba(64, 101, 102, .25), transparent 35%), var(--deep); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    button { font: inherit; color: inherit; }
+    .app { min-height: 100vh; display: grid; grid-template-columns: 230px minmax(0, 1fr); }
+    .rail { position: fixed; z-index: 5; inset: 0 auto 0 0; width: 230px; padding: 28px 20px; border-right: 1px solid var(--line); background: rgba(7, 15, 25, .84); backdrop-filter: blur(18px); display: flex; flex-direction: column; }
+    .brand { display: flex; align-items: center; gap: 10px; letter-spacing: .02em; font-size: 13px; text-transform: uppercase; color: var(--muted); }
+    .brand-mark { width: 25px; height: 25px; border: 1px solid var(--copper); border-radius: 50%; position: relative; }
+    .brand-mark::after { content: ""; position: absolute; width: 7px; height: 7px; border: 1px solid var(--copper); border-radius: 50%; top: 7px; left: 7px; }
+    .rail h1 { margin: 42px 0 26px; font: 600 clamp(23px, 2.2vw, 28px)/1.08 Georgia, serif; letter-spacing: -.03em; }
+    .rail h1 em { color: var(--copper-soft); font-weight: 400; }
+    .scene-list { display: grid; gap: 7px; }
+    .scene-btn { appearance: none; border: 0; border-left: 1px solid transparent; padding: 9px 10px; text-align: left; background: transparent; color: var(--muted); cursor: pointer; transition: .25s ease; border-radius: 0 8px 8px 0; }
+    .scene-btn:hover { color: var(--ink); background: rgba(255,255,255,.04); }
+    .scene-btn.active { border-left-color: var(--copper); color: var(--ink); background: rgba(213, 139, 82, .1); }
+    .scene-btn small { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--copper); margin-bottom: 3px; }
+    .scene-btn span { font-size: 12px; }
+    .rail-foot { margin-top: auto; color: #6e7a80; font-size: 11px; line-height: 1.5; }
+    .stage { grid-column: 2; min-width: 0; position: relative; overflow: hidden; }
+    .topbar { position: fixed; z-index: 4; top: 0; right: 0; left: 230px; display: flex; justify-content: flex-end; gap: 10px; padding: 21px 40px; pointer-events: none; }
+    .topbar button { pointer-events: auto; }
+    .ghost-btn, .solid-btn { border: 1px solid var(--line); border-radius: 999px; background: rgba(8, 17, 29, .64); padding: 9px 14px; color: var(--muted); cursor: pointer; transition: .2s ease; font-size: 12px; }
+    .ghost-btn:hover, .ghost-btn.active { border-color: rgba(213,139,82,.65); color: var(--copper-soft); }
+    .solid-btn { color: #111c23; background: var(--copper); border-color: var(--copper); font-weight: 700; }
+    .solid-btn:hover { background: var(--copper-soft); transform: translateY(-1px); }
+    .scene { min-height: 100vh; padding: 100px clamp(28px, 6vw, 100px) 90px; display: grid; align-items: center; position: relative; isolation: isolate; }
+    .scene::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(8,17,29,.96) 0%, rgba(8,17,29,.84) 34%, rgba(8,17,29,.18) 100%); }
+    .scene::after { content: ""; position: absolute; inset: 0; z-index: -3; opacity: .22; background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 45px 45px; mask-image: linear-gradient(90deg, black, transparent 85%); }
+    .hero-scene { min-height: 100vh; background: linear-gradient(90deg, rgba(8,17,29,.55), transparent 60%), url('hero.png') center/cover; }
+    .hero-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.97) 0%, rgba(8,17,29,.77) 42%, rgba(8,17,29,.12) 100%); }
+    .hero-scene::after { opacity: .1; }
+    .content { width: min(880px, 100%); }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--copper-soft); letter-spacing: .18em; font-size: 11px; text-transform: uppercase; margin-bottom: 22px; }
+    .eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--copper); }
+    h2 { margin: 0; max-width: 900px; font: 500 clamp(46px, 8vw, 96px)/.94 Georgia, serif; letter-spacing: -.065em; }
+    h2 em { color: var(--copper-soft); font-weight: 400; }
+    .hero-copy { max-width: 570px; margin-top: 27px; color: #c8d0ce; font: 400 clamp(18px, 2.4vw, 23px)/1.45 Georgia, serif; }
+    .hero-question { max-width: 550px; margin: 42px 0 30px; font: italic 24px/1.35 Georgia, serif; color: #fff; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .microcopy { font-size: 11px; color: var(--muted); margin-left: 4px; }
+    .section-inner { width: min(1050px, 100%); }
+    .section-title { margin-bottom: 18px; font: 500 clamp(38px, 5.5vw, 68px)/1 Georgia, serif; letter-spacing: -.05em; max-width: 720px; }
+    .lede { max-width: 700px; color: #bdc8c9; font: 18px/1.55 Georgia, serif; margin: 0 0 35px; }
+    .scene-meta { color: var(--copper-soft); font-size: 12px; letter-spacing: .06em; margin-bottom: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 20px; min-height: 155px; transition: .25s ease; cursor: pointer; position: relative; overflow: hidden; }
+    .card:hover { border-color: rgba(213, 139, 82, .48); transform: translateY(-3px); }
+    .card.selected { border-color: var(--copper); background: rgba(213, 139, 82, .12); }
+    .card.selected::after { content: "✓"; position: absolute; top: 15px; right: 15px; color: var(--copper-soft); }
+    .card h3 { margin: 0 0 11px; font-size: 15px; }
+    .card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .card .icon { display: block; color: var(--copper); font-size: 24px; margin-bottom: 15px; }
+    .result-line { min-height: 34px; margin-top: 23px; color: var(--copper-soft); font: italic 19px Georgia, serif; }
+    .choice-row { display: flex; flex-wrap: wrap; gap: 9px; margin: 23px 0; }
+    .choice { border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 999px; padding: 10px 14px; color: var(--muted); cursor: pointer; transition: .2s ease; }
+    .choice:hover, .choice.selected { border-color: var(--copper); color: var(--copper-soft); background: rgba(213, 139, 82, .1); }
+    .quote-panel { margin-top: 30px; border-left: 2px solid var(--copper); padding: 2px 0 2px 22px; max-width: 770px; }
+    blockquote { margin: 0; font: italic 25px/1.36 Georgia, serif; color: #f4f2e9; }
+    cite { display: block; margin-top: 13px; color: var(--muted); font-size: 12px; font-style: normal; }
+    .chain { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; gap: 0; margin: 28px 0 20px; max-width: 800px; }
+    .chain-step { border: 1px solid var(--line); background: var(--panel); padding: 24px 18px; text-align: center; position: relative; }
+    .chain-step:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -17px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--copper); background: var(--deep-2); border: 1px solid var(--line); }
+    .chain-step strong { display: block; font: 500 21px Georgia, serif; }
+    .chain-step small { color: var(--muted); display: block; margin-top: 7px; font-size: 11px; }
+    .tension { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 800px; margin-top: 28px; }
+    .tension div { border-top: 1px solid var(--line); padding-top: 13px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .tension strong { display: block; color: var(--ink); margin-bottom: 5px; }
+    .observe-stage { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 35px; align-items: center; }
+    .landscape { height: 330px; border-radius: 18px; position: relative; overflow: hidden; background: linear-gradient(120deg, rgba(8,17,29,.5), rgba(8,17,29,.06)), url('hero.png') 72% center/cover; box-shadow: var(--shadow); }
+    .landscape::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,17,29,.18), rgba(8,17,29,.52)); }
+    .landscape::after { content: "SURINAM"; position: absolute; inset: 20px 24px auto; color: rgba(255,244,212,.7); letter-spacing: .38em; font: 12px Georgia, serif; }
+    .landscape .tag { position: absolute; display: none; border: 1px solid var(--copper-soft); color: #ffedcb; background: rgba(8,17,29,.78); padding: 5px 8px; border-radius: 5px; font-size: 11px; }
+    .landscape.observing .tag.one { display: block; top: 31%; left: 18%; }
+    .landscape.observing .tag.two { display: block; top: 61%; right: 22%; }
+    .landscape.observing .tag.three { display: block; bottom: 17%; left: 40%; }
+    .landscape.classified { filter: saturate(.55) contrast(1.12); }
+    .landscape.classified .tag { display: block; border-style: dashed; }
+    .step-copy h3 { margin: 0; font: 500 30px Georgia, serif; }
+    .step-copy p { color: var(--muted); line-height: 1.6; }
+    .reverse-stage { min-height: 290px; max-width: 900px; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; background: #142e35; position: relative; }
+    .reverse-side { padding: 30px; display: flex; flex-direction: column; justify-content: flex-end; min-height: 290px; transition: .45s ease; }
+    .reverse-side.europe { background: linear-gradient(135deg, rgba(24, 48, 58,.9), rgba(9, 19, 30,.55)); }
+    .reverse-side.indigenous { background: linear-gradient(135deg, rgba(74, 98, 67,.85), rgba(20, 50, 51,.8)); }
+    .reverse-stage.reversed .europe { transform: translateX(100%); }
+    .reverse-stage.reversed .indigenous { transform: translateX(-100%); }
+    .reverse-stage.reversed::before { content: "THE GAZE TURNS BACK"; position: absolute; z-index: 3; inset: 0; display: grid; place-items: center; font: 500 clamp(22px, 3vw, 40px) Georgia, serif; letter-spacing: .04em; color: #fff; text-shadow: 0 3px 18px #071218; pointer-events: none; }
+    .reverse-side span { color: var(--copper-soft); font-size: 11px; letter-spacing: .17em; text-transform: uppercase; }
+    .reverse-side strong { margin-top: 8px; font: 500 26px Georgia, serif; }
+    .frames { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 800px; margin: 30px 0; }
+    .frame { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel); min-height: 150px; transition: .3s ease; }
+    .frame.active { border-color: var(--copper); box-shadow: 0 0 0 1px rgba(213,139,82,.2) inset; }
+    .frame h3 { font: 500 21px Georgia, serif; margin: 0 0 10px; }
+    .frame p { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0; }
+    .final-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 34px 0 34px; }
+    .final-card { padding: 22px; border-top: 1px solid var(--copper); background: linear-gradient(180deg, rgba(213,139,82,.1), transparent); cursor: pointer; transition: .25s ease; }
+    .final-card:hover { background: linear-gradient(180deg, rgba(213,139,82,.2), transparent); transform: translateY(-3px); }
+    .final-card h3 { margin: 0 0 8px; font: 500 24px Georgia, serif; }
+    .final-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .progress { position: fixed; z-index: 6; bottom: 0; left: 230px; right: 0; height: 3px; background: rgba(255,255,255,.1); }
+    .progress span { display: block; height: 100%; width: 12.5%; background: var(--copper); transition: width .35s ease; }
+    .hint { color: #7f8d92; font-size: 11px; letter-spacing: .05em; }
+    .evidence-drawer { position: fixed; z-index: 8; right: 22px; bottom: 28px; width: min(470px, calc(100vw - 44px)); border: 1px solid rgba(213,139,82,.55); border-radius: 15px; background: rgba(10, 22, 32, .96); box-shadow: var(--shadow); padding: 20px 22px; transform: translateY(120%); opacity: 0; transition: .35s ease; pointer-events: none; }
+    .evidence-drawer.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .evidence-drawer h3 { margin: 0 0 9px; font: 500 21px Georgia, serif; }
+    .evidence-drawer p { color: #bec9ca; font: 15px/1.55 Georgia, serif; margin: 0; }
+    .drawer-close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 18px; }
+    .enter { animation: enter .6s ease both; }
+    @keyframes enter { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 850px) {
+      .app { display: block; }
+      .rail { position: fixed; width: 100%; height: auto; inset: 0 0 auto; padding: 14px 18px; display: flex; flex-direction: row; align-items: center; gap: 18px; }
+      .rail h1, .rail-foot { display: none; }
+      .brand { flex: 0 0 auto; }
+      .scene-list { flex: 1; display: flex; overflow-x: auto; gap: 3px; scrollbar-width: none; }
+      .scene-list::-webkit-scrollbar { display: none; }
+      .scene-btn { flex: 0 0 auto; border-left: 0; border-bottom: 1px solid transparent; padding: 7px 8px; }
+      .scene-btn.active { border-bottom-color: var(--copper); }
+      .scene-btn small { font-size: 9px; }
+      .scene-btn span { display: none; }
+      .stage { padding-top: 52px; }
+      .topbar { left: 0; top: 54px; padding: 13px 18px; }
+      .scene { padding: 105px 22px 75px; }
+      .grid-4, .grid-3, .final-grid { grid-template-columns: 1fr 1fr; }
+      .observe-stage { grid-template-columns: 1fr; }
+      .landscape { height: 250px; }
+      .progress { left: 0; }
+    }
+    @media (max-width: 540px) {
+      .grid-4, .grid-3, .final-grid, .frames, .tension { grid-template-columns: 1fr; }
+      .chain { grid-template-columns: 1fr; gap: 10px; }
+      .chain-step:not(:last-child)::after { content: "↓"; top: auto; bottom: -21px; right: 50%; transform: translateX(50%); }
+      .reverse-stage { grid-template-columns: 1fr; }
+      .reverse-side { min-height: 150px; }
+      .reverse-stage.reversed .europe, .reverse-stage.reversed .indigenous { transform: none; }
+      .reverse-stage.reversed .europe { opacity: .25; }
+      blockquote { font-size: 20px; }
+      h2 { font-size: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="rail" aria-label="Presentation navigation">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>Interactive essay</span></div>
+      <h1>Oroonoko:<br><em>Through the<br>Traveller's Eye</em></h1>
+      <nav class="scene-list" id="sceneList"></nav>
+      <div class="rail-foot">A visual reading of travel writing, colonial knowledge, and narrative authority.<br><br>Use ← → or the buttons to move.</div>
+    </aside>
+    <main class="stage" id="stage" tabindex="-1"></main>
+  </div>
+  <div class="topbar">
+    <button class="ghost-btn" id="overviewBtn">Overview</button>
+    <button class="ghost-btn" id="evidenceBtn">Evidence</button>
+  </div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <aside class="evidence-drawer" id="evidenceDrawer" aria-live="polite">
+    <button class="drawer-close" id="closeEvidence" aria-label="Close evidence">×</button>
+    <h3 id="evidenceTitle">Evidence layer</h3>
+    <p id="evidenceText"></p>
+  </aside>
+  <script>
+    const scenes = [
+      { key: 'entry', short: 'Entry', title: "Through the Traveller's Eye", label: 'Prologue', evidence: 'This opening frames Oroonoko as a text that moves between history, fiction, and travel writing. The narrator’s claim to truth is part of the work’s authority, not a neutral guarantee.' },
+      { key: 'conditions', short: 'Conditions', title: 'How did travel become knowledge?', label: '01 · Origins', evidence: 'The presentation identifies four connected conditions: philosophical empiricism, colonial and maritime expansion, the Grand Tour, and exchange between travel writing and the early novel.' },
+      { key: 'boundaries', short: 'Boundaries', title: 'Where does a genre begin?', label: '02 · Boundaries', evidence: 'Travel writing is treated as a hybrid formation. First-person narration, empirical description, and sequential movement can belong to both travel narrative and fiction.' },
+      { key: 'authority', short: 'Authority', title: 'Who gets to be a witness?', label: '03 · Witnessing', evidence: 'The narrator builds credibility through presence, testimony, and the claim to preserve a story absent from official archives. “Only a female pen” becomes a productive tension.' },
+      { key: 'description', short: 'Description', title: 'When a landscape becomes knowledge', label: '04 · Describing', evidence: 'In the presentation, description is an active knowledge-making practice. Surinam becomes legible through cataloguing, comparison, and European cultural reference points.' },
+      { key: 'encounter', short: 'Encounter', title: 'When the gaze turns back', label: '05 · Encounter', evidence: 'The contact-zone model emphasizes co-presence and unequal power. Indigenous curiosity makes the encounter reciprocal, but the final account remains mediated by the European narrator.' },
+      { key: 'position', short: 'Position', title: 'A narrator between frameworks', label: '06 · Position', evidence: 'Behn can challenge the exclusivity of masculine travel authority while still interpreting colonial subjects through a European representational framework.' },
+      { key: 'return', short: 'Return', title: 'What the story leaves behind', label: '07 · Significance', evidence: 'The final claim is that travel-writing conventions help Oroonoko establish narrative authority, construct colonial knowledge, and expose the tensions of cultural encounter.' }
+    ];
+    let current = 0;
+    const state = { conditions: new Set(), boundaries: new Set(), authority: 'presence', description: 'observe', reversed: false, position: new Set(['gender', 'europe']) };
+    const stage = document.getElementById('stage');
+    const sceneList = document.getElementById('sceneList');
+    const progressBar = document.getElementById('progressBar');
+    const evidenceDrawer = document.getElementById('evidenceDrawer');
+    const evidenceTitle = document.getElementById('evidenceTitle');
+    const evidenceText = document.getElementById('evidenceText');
+
+    function nav() {
+      sceneList.innerHTML = scenes.map((s, i) => `<button class="scene-btn ${i === current ? 'active' : ''}" data-go="${i}"><small>${String(i).padStart(2, '0')}</small><span>${s.short}</span></button>`).join('');
+      sceneList.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => go(Number(btn.dataset.go))));
+      progressBar.style.width = `${((current + 1) / scenes.length) * 100}%`;
+    }
+    function shell(inner, cls = '') {
+      const s = scenes[current];
+      return `<section class="scene ${cls}" data-key="${s.key}"><div class="section-inner enter">${inner}</div></section>`;
+    }
+    function render() {
+      const s = scenes[current];
+      let html = '';
+      if (s.key === 'entry') html = shell(`<div class="content"><div class="eyebrow">${s.label} · Aphra Behn's Oroonoko</div><h2>Through the <em>Traveller's Eye</em></h2><p class="hero-copy">A visual reading of witnessing, describing, and representing a colonial world.</p><p class="hero-question">Who gets to describe the world—and whose account becomes history?</p><div class="hero-actions"><button class="solid-btn" data-next>Enter the manuscript <span aria-hidden="true">→</span></button><span class="microcopy">8 scenes · keyboard ready</span></div></div>`, 'hero-scene');
+      if (s.key === 'conditions') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">How did travel become <em>knowledge?</em></h2><p class="lede">Eighteenth-century travel writing flourished when four cultural shifts began to reinforce one another. Activate each thread and watch the manuscript fill in.</p><div class="grid-4">${[
+        ['◌', 'Experience', 'Empiricism gave travel a new intellectual status.'], ['↗', 'Expansion', 'Colonial and maritime contact fed a public appetite for accounts.'], ['▤', 'Education', 'The Grand Tour made journals, letters, and memoirs part of learning.'], ['⟲', 'Literary exchange', 'Travel narrative and the early novel borrowed from each other.']
+      ].map((x, i) => `<button class="card ${state.conditions.has(i) ? 'selected' : ''}" data-condition="${i}"><span class="icon">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></button>`).join('')}</div><div class="result-line">${state.conditions.size === 4 ? 'Travel became a way of producing knowledge.' : `${state.conditions.size} of 4 threads activated`}</div></div>`);
+      if (s.key === 'boundaries') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Where does a <em>genre</em> begin?</h2><p class="lede">The boundary between travel narrative and fiction is porous. Place each technique where it seems to belong—then see why the categories overlap.</p><div class="choice-row">${['First-person narration', 'Eyewitness claims', 'Detailed description', 'Movement through places'].map((x, i) => `<button class="choice ${state.boundaries.has(i) ? 'selected' : ''}" data-boundary="${i}">${x}</button>`).join('')}</div><div class="frames"><div class="frame ${state.boundaries.size >= 2 ? 'active' : ''}"><h3>Documentary record</h3><p>Observation, evidence, sequence. A promise that the world has been encountered.</p></div><div class="frame ${state.boundaries.size >= 2 ? 'active' : ''}"><h3>Travel narrative / fiction</h3><p>Voice, movement, scene. A promise that the account can be shaped into a story.</p></div></div><div class="quote-panel"><blockquote>Instead of asking what travel writing is, ask what it does.</blockquote><cite>A characteristic-based approach · after Borm, Hulme & Youngs, Thompson, and Pratt</cite></div></div>`);
+      if (s.key === 'authority') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Who gets to be a <em>witness?</em></h2><p class="lede">In Oroonoko, the narrator’s “I” works as an authority marker. Select a link in the chain to see how credibility is staged.</p><div class="chain">${[['presence', 'Being there', 'on-site presence'], ['testimony', 'Claiming truth', 'firsthand observation'], ['archive', 'Preserving a story', 'a history left out']].map(x => `<button class="chain-step ${state.authority === x[0] ? 'active' : ''}" data-authority="${x[0]}"><strong>${x[1]}</strong><small>${x[2]}</small></button>`).join('')}</div><div class="quote-panel"><blockquote>${state.authority === 'archive' ? '“only a female pen”' : state.authority === 'testimony' ? '“Truth” rather than fabricated adventures' : 'The narrator’s physical presence in Surinam'}</blockquote><cite>${state.authority === 'archive' ? 'A modest phrase with a double edge.' : state.authority === 'testimony' ? 'A claim that sounds like travel-writing authority.' : 'Presence becomes proof.'}</cite></div><div class="tension"><div><strong>A constraint</strong>Female authorship can appear to weaken authority within a male-centred literary culture.</div><div><strong>A resource</strong>That same position lets Behn preserve a story missing from official history.</div></div></div>`);
+      if (s.key === 'description') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">When a landscape becomes <em>knowledge</em></h2><p class="lede">Observe, describe, classify. The sequence makes visible how a foreign environment is translated into an intelligible account.</p><div class="observe-stage"><div class="landscape ${state.description === 'observe' ? 'observing' : ''} ${state.description === 'classify' ? 'classified' : ''}" aria-label="Stylized Surinam landscape"><span class="tag one">flora</span><span class="tag two">local custom</span><span class="tag three">natural resource</span></div><div class="step-copy"><h3>${state.description === 'observe' ? 'Look closely.' : state.description === 'describe' ? 'Put experience into words.' : 'Turn details into a system.'}</h3><p>${state.description === 'observe' ? 'The scene is still a scene. Nothing has been sorted yet.' : state.description === 'describe' ? 'Description creates the impression of direct, empirical witness.' : 'Classification makes unfamiliar space legible—but never free from the observer’s frame.'}</p><div class="choice-row"><button class="choice ${state.description === 'observe' ? 'selected' : ''}" data-description="observe">Observe</button><button class="choice ${state.description === 'describe' ? 'selected' : ''}" data-description="describe">Describe</button><button class="choice ${state.description === 'classify' ? 'selected' : ''}" data-description="classify">Classify</button></div></div></div><div class="quote-panel"><blockquote>${state.description === 'classify' ? '“Not all the Gardens of boasted Italy can produce a Shade to out-vie this”' : '“about half the length of the Mall here”'}</blockquote><cite>European reference points give Surinam a readable scale.</cite></div></div>`);
+      if (s.key === 'encounter') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">When the gaze <em>turns back</em></h2><p class="lede">The contact zone is not a one-way window. Indigenous curiosity makes Europeans visible too—but reciprocity does not erase unequal power.</p><div class="reverse-stage ${state.reversed ? 'reversed' : ''}"><div class="reverse-side europe"><span>European visitor</span><strong>Looking outward</strong></div><div class="reverse-side indigenous"><span>Indigenous observers</span><strong>Looking back</strong></div></div><div class="hero-actions" style="margin-top:22px"><button class="solid-btn" data-reverse>${state.reversed ? 'Restore the first view' : 'Reverse the gaze'} <span aria-hidden="true">↔</span></button><span class="microcopy">The narration remains mediated.</span></div><div class="quote-panel"><blockquote>“The encounter is reciprocal. Its final interpretation remains controlled by the narrator.”</blockquote><cite>After Pratt’s contact-zone model</cite></div></div>`);
+      if (s.key === 'position') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">A narrator between <em>frameworks</em></h2><p class="lede">Behn can challenge one hierarchy while remaining within another. Activate both frames to see the tension rather than resolve it.</p><div class="frames">${[['gender', 'Gender and authorship', 'A woman writer unsettles the exclusivity of masculine travel authority.'], ['europe', 'Europe and representation', 'Colonial subjects are still interpreted through a European cultural frame.']].map(x => `<button class="frame ${state.position.has(x[0]) ? 'active' : ''}" data-position="${x[0]}"><h3>${x[1]}</h3><p>${x[2]}</p></button>`).join('')}</div><div class="quote-panel"><blockquote>${state.position.size === 2 ? 'A narrator can challenge one hierarchy while remaining within another.' : 'Select both frames to reveal the tension.'}</blockquote><cite>Position is part of the method, not a footnote.</cite></div></div>`);
+      if (s.key === 'return') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">What the story leaves <em>behind</em></h2><p class="lede">Return to the manuscript. The same conventions that make a world visible also shape what can be known, remembered, and believed.</p><div class="final-grid">${[['Authority', 'Who is entitled to speak?'], ['Knowledge', 'How does description make a world knowable?'], ['Representation', 'Whose perspective shapes what remains?']].map((x, i) => `<button class="final-card" data-go="${i + 3}"><h3>${x[0]}</h3><p>${x[1]}</p></button>`).join('')}</div><div class="quote-panel"><blockquote>Travel-writing conventions help Oroonoko establish authority, construct colonial knowledge, and expose the tensions of cultural encounter.</blockquote><cite>End of presentation · Oroonoko by Aphra Behn</cite></div><p class="hint" style="margin-top:32px">Press Home to return to the opening question.</p></div>`);
+      stage.innerHTML = html;
+      nav();
+      bindScene();
+    }
+    function bindScene() {
+      stage.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => go(current + 1)));
+      stage.querySelectorAll('[data-condition]').forEach(b => b.addEventListener('click', () => { const i = Number(b.dataset.condition); state.conditions.has(i) ? state.conditions.delete(i) : state.conditions.add(i); render(); }));
+      stage.querySelectorAll('[data-boundary]').forEach(b => b.addEventListener('click', () => { const i = Number(b.dataset.boundary); state.boundaries.has(i) ? state.boundaries.delete(i) : state.boundaries.add(i); render(); }));
+      stage.querySelectorAll('[data-authority]').forEach(b => b.addEventListener('click', () => { state.authority = b.dataset.authority; render(); }));
+      stage.querySelectorAll('[data-description]').forEach(b => b.addEventListener('click', () => { state.description = b.dataset.description; render(); }));
+      stage.querySelectorAll('[data-reverse]').forEach(b => b.addEventListener('click', () => { state.reversed = !state.reversed; render(); }));
+      stage.querySelectorAll('[data-position]').forEach(b => b.addEventListener('click', () => { const key = b.dataset.position; state.position.has(key) ? state.position.delete(key) : state.position.add(key); render(); }));
+      stage.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(Number(b.dataset.go))));
+    }
+    function go(index) { current = Math.max(0, Math.min(scenes.length - 1, index)); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); stage.focus({ preventScroll: true }); closeEvidence(); }
+    function openEvidence() { const s = scenes[current]; evidenceTitle.textContent = `${s.label} · Evidence layer`; evidenceText.textContent = s.evidence; evidenceDrawer.classList.add('open'); }
+    function closeEvidence() { evidenceDrawer.classList.remove('open'); }
+    document.getElementById('evidenceBtn').addEventListener('click', openEvidence);
+    document.getElementById('overviewBtn').addEventListener('click', () => { document.querySelector('.scene-list')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); });
+    document.getElementById('closeEvidence').addEventListener('click', closeEvidence);
+    document.addEventListener('keydown', e => { if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return; if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); } if (e.key === 'Home') { e.preventDefault(); go(0); } if (e.key === 'End') { e.preventDefault(); go(scenes.length - 1); } if (e.key.toLowerCase() === 'e') openEvidence(); if (e.key === 'Escape') closeEvidence(); });
+    render();
+  </script>
+</body>
+</html>
