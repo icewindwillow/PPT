@@ -96,9 +96,85 @@
     .chain-step:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -17px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: var(--copper); background: var(--deep-2); border: 1px solid var(--line); }
     .chain-step strong { display: block; font: 500 21px Georgia, serif; }
     .chain-step small { color: var(--muted); display: block; margin-top: 7px; font-size: 11px; }
+    .chain-step.active { border-color: var(--copper); background: rgba(213,139,82,.13); box-shadow: 0 0 0 1px rgba(213,139,82,.18) inset; }
+    .authority-progress { display: flex; justify-content: space-between; gap: 16px; max-width: 800px; margin: 0 0 18px; color: var(--copper-soft); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+    .authority-ledger { max-width: 800px; border: 1px solid var(--line); border-radius: 13px; padding: 15px 18px; background: rgba(255,255,255,.025); }
+    .authority-ledger-head { display: flex; justify-content: space-between; gap: 15px; color: #c4cece; font: italic 16px/1.45 Georgia, serif; }
+    .authority-ledger-list { display: grid; gap: 0; margin-top: 13px; }
+    .authority-entry { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.09); animation: enter .35s ease both; }
+    .authority-entry::before { content: "✦"; color: var(--copper); padding-top: 2px; }
+    .authority-entry strong { display: block; color: #f0c28e; font: 500 16px Georgia, serif; }
+    .authority-entry span { display: block; margin-top: 4px; color: #aebbbc; font: 13px/1.5 Georgia, serif; }
+    .authority-empty { margin: 14px 0 2px; color: var(--muted); font-size: 12px; }
     .tension { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 800px; margin-top: 28px; }
     .tension div { border-top: 1px solid var(--line); padding-top: 13px; color: var(--muted); font-size: 13px; line-height: 1.55; }
     .tension strong { display: block; color: var(--ink); margin-bottom: 5px; }
+    /* Scene 04 — witness authority */
+    .authority-scene { background: radial-gradient(circle at 78% 20%, rgba(213,139,82,.1), transparent 34%), linear-gradient(120deg, rgba(8,17,29,.98), rgba(10,24,32,.94)); }
+    .authority-scene::after { opacity: .13; background-size: 34px 34px; }
+    .witness-intro { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(270px, .85fr); gap: 32px; align-items: end; margin-bottom: 30px; }
+    .witness-intro .lede { margin-bottom: 0; }
+    .witness-question { margin: 0; color: #fff0d4; font: italic 27px/1.2 Georgia, serif; max-width: 370px; }
+    .witness-question::before { content: "“"; color: var(--copper); font-size: 56px; line-height: 0; vertical-align: -19px; margin-right: 5px; }
+    .witness-stage { position: relative; border: 1px solid rgba(213,139,82,.34); border-radius: 18px; padding: 27px 28px 26px; background: linear-gradient(130deg, rgba(213,139,82,.1), rgba(255,255,255,.025) 50%, rgba(57,99,100,.14)); overflow: hidden; }
+    .witness-stage::before { content: "FIRST-PERSON MANUSCRIPT / FOLIO 17"; position: absolute; top: 14px; right: 20px; color: rgba(240,182,120,.7); font-size: 9px; letter-spacing: .16em; }
+    .witness-core { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 27px; align-items: center; }
+    .witness-i { position: relative; display: grid; place-items: center; min-height: 164px; border-right: 1px solid rgba(213,139,82,.28); }
+    .witness-i strong { color: #fff2d5; font: 500 148px/.75 Georgia, serif; letter-spacing: -.18em; transform: translateX(-7px); text-shadow: 0 0 28px rgba(213,139,82,.18); }
+    .witness-i span { position: absolute; bottom: 1px; color: var(--copper-soft); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+    .authority-chain { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; align-items: center; }
+    .authority-node { position: relative; min-height: 96px; display: flex; flex-direction: column; justify-content: center; padding: 14px 13px; border: 1px solid rgba(255,255,255,.14); background: rgba(8,17,29,.45); transition: .3s ease; }
+    .authority-node:not(:last-child)::after { content: "→"; position: absolute; z-index: 1; right: -18px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; color: #637274; background: #10232c; border: 1px solid rgba(255,255,255,.14); font-size: 18px; transition: .3s ease; }
+    .authority-node.active { border-color: var(--copper); background: rgba(213,139,82,.13); box-shadow: inset 0 0 0 1px rgba(213,139,82,.15), 0 9px 24px rgba(0,0,0,.12); }
+    .authority-node.active:not(:last-child)::after { color: var(--copper-soft); border-color: rgba(213,139,82,.6); }
+    .authority-node small { color: var(--copper-soft); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+    .authority-node strong { margin-top: 8px; color: #f7f1e6; font: 500 20px Georgia, serif; }
+    .authority-node span { margin-top: 6px; color: #9eadad; font-size: 11px; line-height: 1.35; }
+    .authority-node.active span { color: #d7c4aa; }
+    .witness-prompt { margin: 18px 0 0; color: #aebbbc; font: 14px/1.5 Georgia, serif; }
+    .witness-prompt strong { color: #f0c28e; font-weight: 500; }
+    .authority-evidence { margin-top: 23px; }
+    .authority-evidence-label { display: flex; justify-content: space-between; gap: 12px; color: var(--copper-soft); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+    .authority-evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-top: 11px; }
+    .authority-evidence-card { appearance: none; text-align: left; min-height: 145px; padding: 17px 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; color: var(--muted); background: rgba(255,255,255,.035); cursor: pointer; transition: .25s ease; }
+    .authority-evidence-card:hover { transform: translateY(-3px); border-color: rgba(213,139,82,.62); }
+    .authority-evidence-card.active { border-color: var(--copper); background: linear-gradient(150deg, rgba(213,139,82,.18), rgba(213,139,82,.05)); box-shadow: inset 0 0 0 1px rgba(213,139,82,.12); }
+    .authority-evidence-card .step-index { display: inline-grid; place-items: center; width: 22px; height: 22px; border: 1px solid rgba(213,139,82,.55); border-radius: 50%; color: var(--copper-soft); font-size: 10px; }
+    .authority-evidence-card strong { display: block; margin: 14px 0 7px; color: #f4d09f; font: 500 18px Georgia, serif; }
+    .authority-evidence-card span { display: block; color: #9eadad; font-size: 11px; line-height: 1.45; }
+    .authority-evidence-card.active span { color: #d4c3aa; }
+    .authority-reading { margin-top: 13px; min-height: 62px; padding: 15px 17px; border-left: 2px solid var(--copper); background: rgba(8,17,29,.3); color: #c6d0ce; font: 15px/1.5 Georgia, serif; }
+    .authority-reading strong { color: #fff0d4; font-weight: 500; }
+    .archive-stage { margin-top: 28px; border: 1px solid rgba(213,139,82,.3); border-radius: 18px; padding: 23px 25px 26px; background: linear-gradient(135deg, rgba(11,29,37,.94), rgba(19,44,46,.75)); }
+    .archive-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 17px; }
+    .archive-head h3 { margin: 0; color: #f6ead6; font: 500 22px Georgia, serif; }
+    .archive-head span { color: #91a2a3; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .archive-rack { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; padding: 19px 13px 15px; border: 1px solid rgba(255,255,255,.1); background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 28px), rgba(5,14,21,.42); }
+    .archive-rack::before, .archive-rack::after { content: ""; position: absolute; left: 0; right: 0; height: 5px; background: rgba(213,139,82,.38); box-shadow: 0 1px 0 rgba(255,255,255,.1); }
+    .archive-rack::before { top: 0; } .archive-rack::after { bottom: 0; }
+    .archive-file { min-height: 112px; padding: 13px 11px; border-left: 3px solid rgba(111,154,133,.58); background: linear-gradient(180deg, rgba(47,88,88,.5), rgba(24,49,53,.45)); }
+    .archive-file span { display: block; color: #8ea7a4; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+    .archive-file strong { display: block; margin-top: 11px; color: #d9e0d7; font: 500 14px Georgia, serif; }
+    .archive-file small { display: block; margin-top: 8px; color: #92a7a8; font-size: 10px; line-height: 1.35; }
+    .archive-file.empty { position: relative; border: 1px dashed rgba(240,182,120,.8); background: rgba(213,139,82,.08); }
+    .archive-file.empty::after { content: "ink pending"; position: absolute; right: 8px; bottom: 8px; color: rgba(240,182,120,.55); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .archive-file.empty.filled { animation: archiveFill .75s ease both; border-style: solid; background: linear-gradient(180deg, rgba(213,139,82,.24), rgba(80,65,47,.26)); }
+    .archive-file.empty.filled::after { content: "entered"; color: var(--copper-soft); }
+    @keyframes archiveFill { from { opacity: .25; transform: translateY(8px) rotate(-1deg); } to { opacity: 1; transform: translateY(0) rotate(0); } }
+    .archive-caption { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-top: 16px; }
+    .archive-caption p { margin: 0; max-width: 590px; color: #adbdbc; font: 14px/1.5 Georgia, serif; }
+    .archive-caption q { color: #f0c28e; font-style: italic; }
+    .tension-reveal { margin-top: 20px; }
+    .tension-button { border: 1px solid rgba(213,139,82,.55); border-radius: 999px; padding: 10px 15px; color: #f0c28e; background: rgba(213,139,82,.08); cursor: pointer; font-size: 12px; transition: .2s ease; }
+    .tension-button:hover, .tension-button.active { color: #111c23; background: var(--copper-soft); }
+    .tension-reading { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 17px; border: 1px solid rgba(213,139,82,.28); overflow: hidden; }
+    .tension-reading article { min-height: 145px; padding: 21px 22px; }
+    .tension-reading article:first-child { border-right: 1px solid rgba(255,255,255,.12); background: linear-gradient(145deg, rgba(71,78,81,.4), rgba(32,43,49,.3)); }
+    .tension-reading article:last-child { background: linear-gradient(145deg, rgba(91,71,46,.35), rgba(35,48,50,.25)); }
+    .tension-reading small { color: #c3a37f; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+    .tension-reading h4 { margin: 10px 0 8px; color: #f5eadb; font: 500 21px Georgia, serif; }
+    .tension-reading p { margin: 0; color: #adbdbc; font: 13px/1.5 Georgia, serif; }
+    .authority-conclusion { margin-top: 28px; padding: 20px 22px; border-top: 1px solid var(--copper); background: linear-gradient(180deg, rgba(213,139,82,.13), transparent); color: #fff0d4; font: italic 24px/1.35 Georgia, serif; max-width: 850px; }
     .observe-stage { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 35px; align-items: center; }
     .landscape { height: 330px; border-radius: 18px; position: relative; overflow: hidden; background: linear-gradient(120deg, rgba(8,17,29,.5), rgba(8,17,29,.06)), url('hero.png') 72% center/cover; box-shadow: var(--shadow); }
     .landscape::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,17,29,.18), rgba(8,17,29,.52)); }
@@ -137,27 +213,27 @@
     .genre-empty { margin: 0; color: var(--muted); font-size: 13px; }
     .genre-board { margin-top: 28px; border: 1px solid rgba(213,139,82,.34); border-radius: 15px; background: linear-gradient(140deg, rgba(213,139,82,.08), rgba(255,255,255,.02)); overflow: hidden; }
     .genre-board-head { display: flex; justify-content: space-between; gap: 18px; padding: 13px 18px; border-bottom: 1px solid var(--line); color: var(--copper-soft); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
-    .genre-board-body { padding: 20px; }
-    .genre-instruction { margin: 0 0 16px; color: #c4cece; font: italic 17px/1.45 Georgia, serif; }
-    .zone-scroll { overflow-x: auto; padding: 0 0 10px; }
-    .zone-canvas { position: relative; min-width: 730px; height: 292px; }
-    .genre-zone { appearance: none; position: absolute; width: 278px; height: 278px; border-radius: 50%; padding: 34px 28px 25px; border: 1px solid rgba(255,255,255,.34); color: var(--ink); cursor: pointer; transition: .25s ease; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .genre-board-body { padding: 20px; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(235px, .6fr); gap: 20px; align-items: center; }
+    .genre-instruction { grid-column: 1 / -1; margin: 0; color: #c4cece; font: italic 17px/1.45 Georgia, serif; }
+    .zone-scroll { overflow-x: auto; padding: 0 0 10px; display: flex; justify-content: center; }
+    .zone-canvas { position: relative; width: 610px; min-width: 610px; height: 244px; margin: 0 auto; }
+    .genre-zone { appearance: none; position: absolute; width: 228px; height: 228px; border-radius: 50%; padding: 28px 20px 20px; border: 1px solid rgba(255,255,255,.34); color: var(--ink); cursor: pointer; transition: .25s ease; text-align: center; display: flex; flex-direction: column; align-items: center; }
     .genre-zone:hover, .genre-zone.drop-ready { border-color: var(--copper-soft); background-color: rgba(213,139,82,.2); }
     .genre-zone.active-target { box-shadow: 0 0 0 2px var(--copper) inset, 0 0 30px rgba(213,139,82,.2); }
     .zone-documentary { left: 0; top: 8px; background: rgba(73, 126, 128, .27); }
-    .zone-travel { left: 226px; top: 8px; background: rgba(213, 139, 82, .2); }
-    .zone-fiction { left: 452px; top: 8px; background: rgba(104, 92, 152, .27); }
-    .genre-zone h3 { margin: 0; font: 500 18px Georgia, serif; }
+    .zone-travel { left: 190px; top: 8px; background: rgba(213, 139, 82, .2); }
+    .zone-fiction { left: 380px; top: 8px; background: rgba(104, 92, 152, .27); }
+    .genre-zone h3 { margin: 0; font: 500 16px Georgia, serif; }
     .genre-zone small { margin-top: 6px; color: #bac5c4; font-size: 11px; }
-    .zone-tokens { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-top: 18px; }
+    .zone-tokens { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-top: 13px; }
     .zone-token { border: 1px solid rgba(255,255,255,.33); border-radius: 999px; padding: 5px 8px; color: #fff0d4; background: rgba(8,17,29,.38); font-size: 10px; }
-    .feature-deck { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 17px; }
+    .feature-deck { grid-column: 2; display: grid; grid-template-columns: 1fr; gap: 9px; margin-top: 0; align-content: center; }
     .feature-card { appearance: none; min-height: 64px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 11px; color: var(--muted); background: rgba(255,255,255,.035); cursor: grab; text-align: left; transition: .2s ease; }
     .feature-card:hover, .feature-card:focus-visible, .feature-card.focused { color: var(--ink); border-color: var(--copper); background: rgba(213,139,82,.12); transform: translateY(-2px); }
     .feature-card:active { cursor: grabbing; }
     .feature-card strong { display: block; color: #f0c28e; font-size: 12px; margin-bottom: 4px; }
     .feature-card span { display: block; font-size: 10px; line-height: 1.35; }
-    .connection-note { margin-top: 17px; padding: 16px 18px; border-left: 2px solid var(--copper); background: rgba(8,17,29,.28); }
+    .connection-note { grid-column: 1 / -1; margin-top: 0; padding: 16px 18px; border-left: 2px solid var(--copper); background: rgba(8,17,29,.28); }
     .connection-note strong { display: block; color: #fff0d4; font: italic 19px Georgia, serif; }
     .connection-note p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .connection-list { display: grid; gap: 7px; margin-top: 12px; }
@@ -180,6 +256,502 @@
     .drawer-close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 18px; }
     .enter { animation: enter .6s ease both; }
     @keyframes enter { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    /* Compact cinematic rewrite for Scene 04 */
+    .authority-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 76% 22%, rgba(213,139,82,.12), transparent 33%), #08111d; }
+    .authority-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.96), rgba(8,17,29,.68)); }
+    .authority-scene::after { opacity: .1; }
+    .authority-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .authority-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 16px; }
+    .authority-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, .52fr); gap: 26px; align-items: end; }
+    .authority-header .eyebrow { margin-bottom: 10px; }
+    .authority-title { margin: 0; max-width: 760px; color: #f6f0e5; font: 500 clamp(42px, 5.6vw, 76px)/.93 Georgia, serif; letter-spacing: -.065em; }
+    .authority-title em { color: var(--copper-soft); font-weight: 400; }
+    .authority-question { align-self: end; padding: 0 0 3px 18px; border-left: 1px solid rgba(213,139,82,.7); color: #f4d2a5; font: italic 21px/1.25 Georgia, serif; }
+    .authority-question small { display: block; margin-top: 9px; color: #8fa0a2; font: 10px/1.4 Inter, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    .authority-body { min-height: 0; display: grid; grid-template-columns: minmax(330px, .9fr) minmax(0, 1.22fr); gap: 16px; }
+    .witness-portrait { position: relative; min-height: 0; border: 1px solid rgba(213,139,82,.35); border-radius: 17px; overflow: hidden; background: radial-gradient(circle at 50% 43%, rgba(213,139,82,.2), transparent 36%), linear-gradient(145deg, rgba(18,38,48,.94), rgba(8,18,27,.95)); }
+    .witness-portrait::before { content: "THE NARRATIVE I"; position: absolute; z-index: 2; top: 17px; left: 20px; color: rgba(240,182,120,.75); font-size: 9px; letter-spacing: .18em; }
+    .witness-portrait::after { content: "SURINAM / 1690s"; position: absolute; z-index: 2; right: 19px; bottom: 16px; color: rgba(174,190,186,.55); font-size: 9px; letter-spacing: .14em; }
+    .constellation { position: absolute; inset: 10% 6% 15%; }
+    .constellation::before, .constellation::after { content: ""; position: absolute; inset: 14% 13%; border: 1px solid rgba(213,139,82,.22); border-radius: 50%; transform: rotate(-16deg) scaleY(.62); }
+    .constellation::after { inset: 21% 3%; border-color: rgba(110,160,128,.19); transform: rotate(28deg) scaleY(.62); }
+    .constellation svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .orbit-link { fill: none; stroke: rgba(153,170,166,.24); stroke-width: 1.2; stroke-dasharray: 4 7; transition: .35s ease; }
+    .orbit-link.active { stroke: var(--copper); stroke-width: 2; stroke-dasharray: 2 4; filter: drop-shadow(0 0 5px rgba(213,139,82,.45)); }
+    .witness-core-mark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -53%); display: grid; place-items: center; width: 168px; height: 168px; border: 1px solid rgba(240,182,120,.7); border-radius: 50%; background: radial-gradient(circle, rgba(213,139,82,.27), rgba(8,17,29,.08) 68%); box-shadow: 0 0 0 15px rgba(213,139,82,.035), 0 0 65px rgba(213,139,82,.18); }
+    .witness-core-mark strong { color: #fff0d4; font: 500 154px/.74 Georgia, serif; letter-spacing: -.17em; transform: translateX(-11px); }
+    .witness-core-mark span { position: absolute; bottom: 14px; color: #e2b57f; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
+    .orbit-node { position: absolute; z-index: 3; display: grid; gap: 2px; min-width: 92px; padding: 9px 11px; border: 1px solid rgba(255,255,255,.17); border-radius: 10px; color: #afbebc; background: rgba(7,17,26,.84); cursor: pointer; text-align: left; transition: .3s ease; }
+    .orbit-node:hover, .orbit-node.active { border-color: var(--copper); color: #fff0d4; background: rgba(213,139,82,.16); transform: translateY(-2px); }
+    .orbit-node strong { font: 500 15px Georgia, serif; }
+    .orbit-node small { color: #819494; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+    .orbit-node.active small { color: #d5b585; }
+    .orbit-presence { top: 9%; left: 1%; }
+    .orbit-testimony { top: 10%; right: 0; }
+    .orbit-authority { bottom: 5%; left: 50%; transform: translateX(-50%); }
+    .orbit-authority:hover, .orbit-authority.active { transform: translate(-50%, -2px); }
+    .portrait-caption { position: absolute; right: 21px; bottom: 37px; left: 21px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.12); color: #a8b9b7; font: 13px/1.45 Georgia, serif; }
+    .portrait-caption em { color: #f0c28e; font-style: normal; }
+    .authority-board { min-height: 0; display: grid; grid-template-rows: auto auto minmax(92px, 1fr) auto auto; gap: 10px; padding: 18px; border: 1px solid rgba(255,255,255,.13); border-radius: 17px; background: rgba(12,28,38,.8); }
+    .board-label { display: flex; justify-content: space-between; gap: 12px; color: #e3c394; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+    .board-label span:last-child { color: #7f9293; }
+    .basis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .basis-card { appearance: none; min-height: 112px; padding: 13px 12px; border: 1px solid rgba(255,255,255,.13); border-radius: 11px; color: #9aacab; background: rgba(255,255,255,.035); cursor: pointer; text-align: left; transition: .25s ease; }
+    .basis-card:hover { border-color: rgba(213,139,82,.65); transform: translateY(-2px); }
+    .basis-card.active { border-color: var(--copper); background: linear-gradient(145deg, rgba(213,139,82,.2), rgba(213,139,82,.055)); }
+    .basis-card b { display: inline-grid; place-items: center; width: 21px; height: 21px; border: 1px solid rgba(240,182,120,.55); border-radius: 50%; color: #f0c28e; font-size: 10px; font-weight: 500; }
+    .basis-card strong { display: block; margin: 12px 0 6px; color: #f4d09f; font: 500 17px Georgia, serif; }
+    .basis-card span { display: block; font-size: 10px; line-height: 1.4; }
+    .basis-card.active span { color: #d3c0a4; }
+    .authority-reading-compact { min-height: 0; padding: 15px 16px; border-left: 2px solid var(--copper); color: #b8c6c3; background: rgba(8,17,29,.33); font: 15px/1.45 Georgia, serif; }
+    .authority-reading-compact strong { color: #ffebc9; font-weight: 500; }
+    .archive-mini { display: grid; grid-template-columns: minmax(0, 1fr) 144px; gap: 11px; align-items: stretch; }
+    .archive-slot { min-width: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 9px; border: 1px solid rgba(213,139,82,.27); background: rgba(5,14,21,.42); }
+    .archive-mini-file { min-width: 0; min-height: 65px; padding: 9px 8px; border-left: 2px solid rgba(110,160,128,.52); background: rgba(35,73,75,.33); }
+    .archive-mini-file small { display: block; color: #89a2a1; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+    .archive-mini-file strong { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin-top: 7px; color: #d5dfd5; font: 500 12px Georgia, serif; }
+    .archive-mini-file.empty { border: 1px dashed rgba(240,182,120,.85); background: rgba(213,139,82,.1); }
+    .archive-mini-file.empty.filled { border-style: solid; animation: archiveFill .65s ease both; background: rgba(213,139,82,.23); }
+    .archive-mini-file.empty.filled strong { color: #ffe2b3; }
+    .tension-button-compact { position: relative; z-index: 5; min-width: 0; overflow: hidden; align-self: stretch; border: 1px solid rgba(213,139,82,.62); border-radius: 11px; padding: 11px; color: #f0c28e; background: rgba(213,139,82,.08); cursor: pointer; font: 500 13px Georgia, serif; transition: .2s ease; }
+    .tension-button-compact:hover, .tension-button-compact.active { color: #101b22; background: var(--copper-soft); }
+    .tension-panel-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid rgba(213,139,82,.28); overflow: hidden; }
+    .tension-panel-compact article { min-height: 100px; padding: 13px 15px; }
+    .tension-panel-compact article:first-child { border-right: 1px solid rgba(255,255,255,.11); background: rgba(54,65,70,.37); }
+    .tension-panel-compact article:last-child { background: rgba(86,68,44,.32); }
+    .tension-panel-compact small { color: #caa778; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .tension-panel-compact h4 { margin: 6px 0 5px; color: #f4e6d1; font: 500 16px Georgia, serif; }
+    .tension-panel-compact p { display: none; margin: 0; color: #aebdbc; font: 11px/1.4 Georgia, serif; }
+    .authority-conclusion-compact { padding: 10px 2px 0; color: #eac693; font: italic 16px/1.25 Georgia, serif; }
+    /* Scene 05 — description as a knowledge-making animation */
+    .description-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 24% 18%, rgba(90,132,116,.16), transparent 34%), #08111d; }
+    .description-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.95), rgba(8,17,29,.56)); }
+    .description-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .description-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 13px; }
+    .description-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .5fr); gap: 26px; align-items: end; }
+    .description-header .eyebrow { margin-bottom: 10px; }
+    .description-title { margin: 0; max-width: 760px; color: #f5eee2; font: 500 clamp(40px, 5.2vw, 70px)/.94 Georgia, serif; letter-spacing: -.065em; }
+    .description-title em { color: #8fb79d; font-weight: 400; }
+    .description-question { align-self: end; padding: 0 0 3px 17px; border-left: 1px solid rgba(126,177,144,.7); color: #cee0d2; font: italic 20px/1.25 Georgia, serif; }
+    .description-question small { display: block; margin-top: 8px; color: #84999a; font: 9px/1.4 Inter, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+    .description-main { min-height: 0; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); gap: 13px; }
+    .field-card { position: relative; min-height: 0; overflow: hidden; border: 1px solid rgba(116,161,137,.45); border-radius: 16px; background: #172c2b; }
+    .field-view { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(180deg, rgba(5,17,20,.08), rgba(5,17,20,.52)), url('hero.png') center/cover; filter: saturate(.82) contrast(.96); transition: filter .8s ease, transform .8s ease; }
+    .field-view::before { content: "SURINAM / FIELD PLATE"; position: absolute; z-index: 3; top: 15px; left: 17px; color: rgba(238,221,182,.82); font: 9px Georgia, serif; letter-spacing: .16em; }
+    .field-view::after { content: "unlabelled scene"; position: absolute; z-index: 3; right: 16px; bottom: 15px; color: rgba(236,222,192,.72); font-size: 9px; letter-spacing: .13em; text-transform: uppercase; transition: .4s ease; }
+    .field-view.describe { filter: saturate(.94) contrast(1.02); }
+    .field-view.classify { filter: saturate(.72) contrast(1.12); transform: scale(1.018); }
+    .field-view.describe::after { content: "description enters"; }
+    .field-view.classify::after { content: "knowledge organised"; }
+    .scan-beam { position: absolute; z-index: 2; top: 0; bottom: 0; left: -30%; width: 22%; background: linear-gradient(90deg, transparent, rgba(231,214,161,.4), transparent); transform: skewX(-12deg); opacity: 0; pointer-events: none; }
+    .field-view.observe .scan-beam { animation: scanField 2.6s ease-in-out infinite; opacity: .9; }
+    @keyframes scanField { 0% { left: -25%; } 100% { left: 115%; } }
+    .field-marker { position: absolute; z-index: 4; display: grid; gap: 3px; opacity: 0; transform: translateY(8px) scale(.9); transition: opacity .45s ease, transform .45s ease; pointer-events: none; }
+    .field-marker::before { content: ""; width: 8px; height: 8px; border: 1px solid #f3d19b; border-radius: 50%; box-shadow: 0 0 0 4px rgba(243,209,155,.13); }
+    .field-marker span { margin-left: 13px; margin-top: -12px; padding: 5px 7px; border: 1px solid rgba(243,209,155,.52); border-radius: 4px; color: #ffe8bc; background: rgba(7,18,23,.8); font: 10px Georgia, serif; white-space: nowrap; }
+    .field-view.describe .field-marker, .field-view.classify .field-marker { opacity: 1; transform: translateY(0) scale(1); }
+    .marker-flora { top: 28%; left: 17%; }
+    .marker-animals { top: 54%; left: 67%; transition-delay: .12s; }
+    .marker-residents { top: 64%; left: 80%; transition-delay: .24s; }
+    .field-view.classify .field-marker::before { border-radius: 2px; border-color: #8fc49b; box-shadow: 0 0 0 4px rgba(143,196,155,.13); }
+    .field-view.classify .field-marker span { border-color: rgba(143,196,155,.55); color: #c9e4c9; }
+    .field-view.classify .marker-flora span::before { content: "01 / "; color: #8fc49b; }
+    .field-view.classify .marker-animals span::before { content: "02 / "; color: #8fc49b; }
+    .field-view.classify .marker-residents span::before { content: "03 / "; color: #8fc49b; }
+    .field-note { position: absolute; z-index: 5; left: 17px; bottom: 17px; max-width: 310px; padding: 11px 13px; border-left: 2px solid rgba(243,209,155,.8); color: #f4e4c4; background: rgba(7,18,23,.76); font: 13px/1.35 Georgia, serif; backdrop-filter: blur(7px); }
+    .field-note span { display: block; margin-top: 5px; color: #aabcb0; font: 9px/1.35 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+    .field-view.observe .field-note { color: #e7d4ac; }
+    .field-view.describe .field-note { border-color: #f0c68e; }
+    .field-view.classify .field-note { border-color: #8fc49b; }
+    .script-card { min-height: 0; display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 10px; padding: 16px; border: 1px solid rgba(255,255,255,.13); border-radius: 16px; background: rgba(14,32,39,.82); }
+    .script-label { display: flex; justify-content: space-between; gap: 10px; color: #bdd3c0; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .script-label span:last-child { color: #7d9291; }
+    .stage-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .stage-control { appearance: none; min-height: 54px; padding: 8px 7px; border: 1px solid rgba(255,255,255,.14); border-radius: 9px; color: #819694; background: rgba(255,255,255,.03); cursor: pointer; text-align: left; transition: .25s ease; }
+    .stage-control:hover { border-color: rgba(143,196,155,.7); color: #d9e9d9; }
+    .stage-control.active { border-color: #8fc49b; color: #e2f0e0; background: rgba(110,160,128,.16); }
+    .stage-control b { display: block; color: #8fc49b; font: 10px Inter, sans-serif; letter-spacing: .12em; }
+    .stage-control strong { display: block; margin-top: 6px; color: inherit; font: 500 15px Georgia, serif; }
+    .script-reading { min-height: 0; padding: 15px; border-left: 2px solid #8fb79d; background: rgba(8,17,29,.36); }
+    .script-reading h3 { margin: 0 0 8px; color: #f4ead6; font: 500 22px Georgia, serif; }
+    .script-reading p { margin: 0; color: #b6c6c2; font: 13px/1.5 Georgia, serif; }
+    .script-reading em { color: #d9c195; font-style: normal; }
+    .manuscript-strip { min-height: 86px; padding: 11px 12px; border: 1px solid rgba(143,196,155,.28); background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 25px), rgba(38,61,55,.33); }
+    .manuscript-strip small { display: block; color: #8fb79d; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+    .manuscript-strip p { margin: 9px 0 0; color: #e0d6bb; font: italic 16px/1.3 Georgia, serif; }
+    .manuscript-strip p span { color: #8fc49b; }
+    .comparison-card { position: relative; display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.15fr) minmax(0, .75fr) 132px; gap: 11px; min-height: 130px; padding: 13px; border: 1px solid rgba(213,139,82,.32); border-radius: 14px; background: linear-gradient(120deg, rgba(71,83,74,.36), rgba(75,62,44,.32)); overflow: hidden; }
+    .comparison-card::before { content: "COMPARISON LENS"; position: absolute; top: 9px; left: 14px; color: rgba(239,191,125,.76); font-size: 9px; letter-spacing: .15em; }
+    .compare-view { position: relative; min-height: 102px; margin-top: 12px; border: 1px solid rgba(255,255,255,.14); overflow: hidden; background: url('hero.png') center/cover; }
+    .compare-view.europe { filter: sepia(.34) saturate(.68) contrast(1.02); background-position: left center; }
+    .compare-view.colony { filter: saturate(.65) contrast(1.05); background-position: right center; }
+    .compare-view span { position: absolute; left: 9px; bottom: 8px; padding: 3px 6px; color: #f7e5c1; background: rgba(7,17,22,.72); font: 10px Georgia, serif; }
+    .compare-copy { display: grid; align-content: center; gap: 5px; margin-top: 12px; }
+    .compare-copy small { color: #aeb8aa; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .compare-copy blockquote { margin: 0; color: #f4d09d; font: italic 16px/1.3 Georgia, serif; }
+    .comparison-card.revealed .compare-copy blockquote { font-size: 11px; line-height: 1.18; }
+    .comparison-card.revealed .compare-copy blockquote + blockquote { margin-top: 4px; }
+    .compare-copy cite { margin: 0; color: #8e9e99; font-size: 10px; }
+    .scale-line { position: absolute; left: 11px; right: 11px; bottom: 11px; height: 1px; background: rgba(239,191,125,.7); transform: scaleX(0); transform-origin: left; transition: transform .8s ease; }
+    .scale-line::before, .scale-line::after { content: ""; position: absolute; top: -4px; width: 1px; height: 9px; background: rgba(239,191,125,.8); }
+    .scale-line::before { left: 0; } .scale-line::after { right: 0; }
+    .comparison-card.revealed .scale-line { transform: scaleX(1); }
+    .comparison-card.revealed .compare-view::after { content: "familiar scale"; position: absolute; right: 8px; bottom: 8px; color: #f0c28e; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+    .compare-action { align-self: stretch; margin-top: 12px; border: 1px solid rgba(213,139,82,.62); border-radius: 10px; color: #f0c28e; background: rgba(213,139,82,.09); cursor: pointer; font: 500 13px Georgia, serif; transition: .2s ease; }
+    .compare-action:hover, .comparison-card.revealed .compare-action { color: #17201f; background: #e1b379; }
+    .comparison-note { position: absolute; right: 160px; bottom: 8px; color: #899a95; font-size: 9px; }
+    .description-conclusion { padding: 2px 0 0; color: #c8d9c9; font: italic 16px/1.25 Georgia, serif; }
+    .description-conclusion strong { color: #8fc49b; font-weight: 400; }
+    /* Scene 06 — reciprocal looking without equal power */
+    .encounter-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 78% 32%, rgba(84,116,84,.18), transparent 36%), #08111d; }
+    .encounter-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.94), rgba(8,17,29,.52)); }
+    .encounter-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .encounter-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 13px; }
+    .encounter-header, .position-header, .return-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .5fr); gap: 26px; align-items: end; }
+    .encounter-header .eyebrow, .position-header .eyebrow, .return-header .eyebrow { margin-bottom: 10px; }
+    .encounter-title, .position-title, .return-title { margin: 0; color: #f5eee2; font: 500 clamp(40px, 5.2vw, 70px)/.94 Georgia, serif; letter-spacing: -.065em; }
+    .encounter-title em { color: #a8c7a7; font-weight: 400; }
+    .encounter-question-head, .position-question-head, .return-question-head { align-self: end; padding: 0 0 3px 17px; border-left: 1px solid rgba(143,196,155,.72); color: #d8e6d5; font: italic 20px/1.25 Georgia, serif; }
+    .encounter-question-head small, .position-question-head small, .return-question-head small { display: block; margin-top: 8px; color: #859998; font: 9px/1.4 Inter, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+    .encounter-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(280px, .82fr); gap: 13px; }
+    .encounter-stage { position: relative; min-height: 0; padding: 13px; border: 1px solid rgba(143,196,155,.34); border-radius: 16px; background: rgba(14,34,38,.78); overflow: hidden; }
+    .encounter-canvas { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: calc(100% - 48px); min-height: 330px; overflow: hidden; border: 1px solid rgba(255,255,255,.13); background: #12272c; }
+    .encounter-half { position: relative; overflow: hidden; transition: transform .75s cubic-bezier(.2,.75,.24,1), filter .75s ease, opacity .75s ease; }
+    .encounter-half::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,19,25,.06), rgba(7,19,25,.66)); }
+    .encounter-half::after { position: absolute; top: 13px; left: 13px; color: rgba(239,218,177,.82); font: 9px Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    .encounter-half.europe-half { background: linear-gradient(120deg, rgba(23,48,55,.44), rgba(8,18,25,.1)), url('hero.png') 72% center/cover; }
+    .encounter-half.europe-half::after { content: "European visitors"; }
+    .encounter-half.local-half { background: linear-gradient(120deg, rgba(85,104,69,.3), rgba(11,28,29,.2)), url('hero.png') 26% center/cover; }
+    .encounter-half.local-half::after { content: "local residents"; }
+    .encounter-half .gaze-mark { position: absolute; top: 52%; width: 58%; height: 1px; background: linear-gradient(90deg, transparent, rgba(241,209,150,.82)); }
+    .europe-half .gaze-mark { right: 0; transform-origin: right; }
+    .local-half .gaze-mark { left: 0; transform-origin: left; opacity: .38; background: linear-gradient(90deg, rgba(143,196,155,.82), transparent); }
+    .encounter-half .gaze-mark::after { content: ""; position: absolute; top: -3px; width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 50%; color: #f1d196; }
+    .europe-half .gaze-mark::after { right: 0; } .local-half .gaze-mark::after { left: 0; color: #8fc49b; }
+    .encounter-canvas.reversed .europe-half { order: 2; filter: saturate(.56) brightness(.85); transform: scaleX(-1); }
+    .encounter-canvas.reversed .local-half { order: 1; filter: saturate(1.05) brightness(1.05); }
+    .encounter-canvas.reversed .europe-half::after { transform: scaleX(-1); left: auto; right: 13px; color: #b6aaa0; }
+    .encounter-canvas.reversed .local-half::after { color: #d6e4c7; }
+    .encounter-center-label { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 9px 11px; border: 1px solid rgba(241,209,150,.6); color: #f5e4c2; background: rgba(8,19,24,.73); font: 9px Inter, sans-serif; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; transition: .5s ease; }
+    .encounter-canvas.reversed .encounter-center-label { border-color: rgba(143,196,155,.72); color: #d1e9d0; }
+    .encounter-stage-caption { display: flex; justify-content: space-between; gap: 10px; padding: 10px 2px 0; color: #99aeaa; font: 11px/1.3 Georgia, serif; }
+    .encounter-stage-caption strong { color: #e6ca96; font-weight: 400; }
+    .encounter-controls { position: absolute; right: 14px; bottom: 10px; }
+    .reverse-action, .mediation-action { border: 1px solid rgba(213,139,82,.65); border-radius: 999px; padding: 9px 13px; color: #f0c28e; background: rgba(213,139,82,.1); cursor: pointer; font: 500 12px Georgia, serif; transition: .2s ease; }
+    .reverse-action:hover, .mediation-action:hover, .mediation-action.active { color: #13221f; background: #e1b379; }
+    .encounter-logic { min-height: 0; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: 11px; padding: 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 16px; background: rgba(13,31,37,.82); }
+    .logic-label { color: #9ac1a2; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+    .encounter-logic h3 { margin: 0; color: #f1ead8; font: 500 23px/1.1 Georgia, serif; }
+    .encounter-logic p { margin: 0; color: #afbfbb; font: 13px/1.52 Georgia, serif; }
+    .logic-question { align-self: end; padding: 13px 0 13px 14px; border-left: 2px solid #8fb79d; color: #f1dfbb; font: italic 20px/1.25 Georgia, serif; }
+    .mediation-action { justify-self: start; }
+    .encounter-overlay { position: absolute; z-index: 8; inset: 10px; display: grid; place-items: center; padding: 24px; border: 1px solid rgba(238,210,159,.7); background: rgba(228,217,187,.16); backdrop-filter: blur(3px); animation: overlayIn .55s ease both; }
+    .encounter-overlay::before { content: "MANUSCRIPT OVERLAY / NARRATION LAYER"; position: absolute; top: 13px; left: 15px; color: rgba(245,223,180,.78); font-size: 8px; letter-spacing: .14em; }
+    .encounter-overlay blockquote { max-width: 590px; margin: 0; color: #fff0d0; text-align: center; text-shadow: 0 2px 15px rgba(4,12,16,.7); font: italic clamp(22px, 3vw, 34px)/1.2 Georgia, serif; }
+    .encounter-overlay p { max-width: 480px; margin: 15px 0 0; color: #f0e7cf; text-align: center; font: 13px/1.45 Georgia, serif; }
+    @keyframes overlayIn { from { opacity: 0; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
+    .encounter-footer { padding: 3px 0 0; color: #cbdcc9; font: italic 16px/1.25 Georgia, serif; }
+    .encounter-footer strong { color: #8fc49b; font-weight: 400; }
+
+    /* Scene 07 — a narrator between frameworks */
+    .position-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 25% 34%, rgba(213,139,82,.12), transparent 34%), #08111d; }
+    .position-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.95), rgba(8,17,29,.55)); }
+    .position-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .position-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 13px; }
+    .position-title em { color: #e2b27a; font-weight: 400; }
+    .position-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(280px, .92fr); gap: 13px; }
+    .position-map { position: relative; min-height: 0; overflow: hidden; border: 1px solid rgba(213,139,82,.34); border-radius: 16px; background: radial-gradient(circle at 50% 50%, rgba(213,139,82,.19), transparent 24%), linear-gradient(145deg, rgba(26,48,55,.9), rgba(10,19,27,.93)); }
+    .position-map::before { content: "THE NARRATOR / POSITION MAP"; position: absolute; top: 15px; left: 17px; color: rgba(240,182,120,.78); font-size: 9px; letter-spacing: .15em; }
+    .position-map::after { content: "two frameworks / one voice"; position: absolute; right: 17px; bottom: 14px; color: #869b98; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .framework-orbit { position: absolute; top: 50%; left: 50%; width: 47%; height: 72%; border: 1px solid rgba(213,139,82,.45); border-radius: 50%; transform: translate(-77%, -50%) rotate(-13deg); transition: .5s ease; }
+    .framework-orbit.europe-orbit { border-color: rgba(143,196,155,.5); transform: translate(-23%, -50%) rotate(13deg); }
+    .framework-orbit.active { box-shadow: 0 0 45px rgba(213,139,82,.14); background: rgba(213,139,82,.08); }
+    .framework-orbit.europe-orbit.active { box-shadow: 0 0 45px rgba(143,196,155,.14); background: rgba(143,196,155,.07); }
+    .orbit-caption { position: absolute; top: 16%; left: 15%; color: #e3b27b; font: 500 14px Georgia, serif; transform: rotate(-13deg); }
+    .europe-orbit .orbit-caption { top: 16%; left: auto; right: 10%; color: #a7d0af; transform: rotate(13deg); text-align: right; }
+    .behn-core { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid; place-items: center; width: 150px; height: 150px; border: 1px solid rgba(245,220,169,.78); border-radius: 50%; color: #fff1d5; background: radial-gradient(circle, rgba(213,139,82,.3), rgba(8,17,29,.08) 68%); transform: translate(-50%, -50%); box-shadow: 0 0 0 14px rgba(213,139,82,.035), 0 0 55px rgba(213,139,82,.16); }
+    .behn-core strong { font: 500 25px Georgia, serif; }
+    .behn-core small { margin-top: 5px; color: #d8b67e; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; transform: translateY(-8px); }
+    .position-frameworks { min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 16px; background: rgba(13,31,37,.82); }
+    .position-frameworks > header { display: flex; justify-content: space-between; gap: 10px; color: #e3c394; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .position-frameworks > header span:last-child { color: #7d9291; }
+    .framework-list { display: grid; gap: 8px; align-content: start; }
+    .framework-card { appearance: none; min-height: 118px; padding: 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 11px; color: #a9bab6; background: rgba(255,255,255,.035); cursor: pointer; text-align: left; transition: .3s ease; }
+    .framework-card:hover { transform: translateY(-2px); border-color: rgba(213,139,82,.65); }
+    .framework-card.active { border-color: #e0af75; background: linear-gradient(145deg, rgba(213,139,82,.18), rgba(213,139,82,.05)); }
+    .framework-card.europe-card.active { border-color: #8fc49b; background: linear-gradient(145deg, rgba(110,160,128,.16), rgba(110,160,128,.04)); }
+    .framework-card small { color: #c59a68; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .framework-card.europe-card small { color: #8fc49b; }
+    .framework-card h3 { margin: 8px 0 6px; color: #f5ead8; font: 500 20px Georgia, serif; }
+    .framework-card p { margin: 0; color: #aebdbc; font: 12px/1.45 Georgia, serif; }
+    .position-reading { min-height: 68px; padding: 13px 14px; border-left: 2px solid #dca86d; color: #c2cfca; background: rgba(8,17,29,.35); font: 14px/1.45 Georgia, serif; }
+    .position-reading strong { color: #f2d09f; font-weight: 400; }
+    .position-footer { padding: 3px 0 0; color: #d9c49d; font: italic 16px/1.25 Georgia, serif; }
+
+    /* Scene 08 — return to the page */
+    .return-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 74% 23%, rgba(213,139,82,.14), transparent 34%), #08111d; }
+    .return-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.95), rgba(8,17,29,.55)); }
+    .return-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .return-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 13px; }
+    .return-title em { color: #e0b276; font-weight: 400; }
+    .return-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(290px, .9fr); gap: 13px; }
+    .return-manuscript { position: relative; min-height: 0; overflow: hidden; padding: 19px; border: 1px solid rgba(213,139,82,.4); border-radius: 16px; background: linear-gradient(145deg, rgba(91,73,51,.33), rgba(21,38,42,.85)); }
+    .return-manuscript::before { content: "FINAL FOLIO / RETURN TO THE PAGE"; position: absolute; top: 15px; left: 19px; color: rgba(240,182,120,.8); font-size: 9px; letter-spacing: .15em; }
+    .folio-title { position: absolute; top: 50px; left: 19px; color: #f4dfbb; font: italic 26px Georgia, serif; }
+    .folio-route { position: absolute; top: 47%; left: 12%; width: 69%; height: 1px; background: linear-gradient(90deg, rgba(213,139,82,.05), rgba(213,139,82,.8), rgba(143,196,155,.65), rgba(213,139,82,.05)); transform: rotate(-12deg); }
+    .folio-route::after { content: ""; position: absolute; right: 10%; top: -3px; width: 7px; height: 7px; border: 1px solid #f0c28e; border-radius: 50%; background: #172b31; box-shadow: 0 0 0 5px rgba(240,194,142,.1); }
+    .folio-token { position: absolute; padding: 7px 9px; border: 1px solid rgba(255,255,255,.2); color: #c1d0c6; background: rgba(9,20,25,.5); font: 10px Georgia, serif; transform: rotate(-4deg); }
+    .folio-token.route { top: 27%; left: 15%; color: #e5b477; } .folio-token.quote { top: 32%; right: 13%; color: #e3c395; transform: rotate(5deg); } .folio-token.flora { bottom: 24%; left: 18%; color: #9fc8a5; transform: rotate(4deg); } .folio-token.gaze { bottom: 21%; right: 16%; color: #b7c9c1; transform: rotate(-5deg); }
+    .return-manuscript p { position: absolute; bottom: 19px; left: 19px; right: 19px; margin: 0; color: #acb9b1; font: 13px/1.45 Georgia, serif; }
+    .return-themes { min-height: 0; display: grid; grid-template-rows: auto repeat(3, 1fr); gap: 8px; padding: 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 16px; background: rgba(13,31,37,.82); }
+    .return-themes > header { display: flex; justify-content: space-between; color: #e3c394; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .return-themes > header span:last-child { color: #7d9291; }
+    .theme-card { appearance: none; display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; align-items: center; padding: 11px; border: 1px solid rgba(255,255,255,.14); border-radius: 10px; color: #aebdbc; background: rgba(255,255,255,.035); cursor: pointer; text-align: left; transition: .25s ease; }
+    .theme-card:hover { transform: translateX(3px); border-color: rgba(213,139,82,.65); background: rgba(213,139,82,.1); }
+    .theme-card h3 { margin: 0 0 5px; color: #f5e9d4; font: 500 19px Georgia, serif; }
+    .theme-card p { margin: 0; color: #aebdbc; font: italic 11px/1.35 Georgia, serif; }
+    .theme-index { display: grid; place-items: center; height: 100%; min-height: 52px; border-right: 1px solid rgba(213,139,82,.45); color: #e4b77e; font: 500 12px Georgia, serif; letter-spacing: .08em; }
+    .return-conclusion { padding: 12px 14px; border-top: 1px solid #d9a56b; color: #f1dfbf; background: linear-gradient(180deg, rgba(213,139,82,.13), transparent); font: italic 18px/1.3 Georgia, serif; }
+    .return-question { margin: 8px 0 0; color: #a9bbb3; font: 13px/1.4 Georgia, serif; }
+
+    /* Scene 08 — interactive reassembly */
+    .return-scene .section-inner { width: min(1180px, 100%); height: auto; min-height: calc(100vh - 112px); }
+    .return-page { height: auto; }
+    .return-body { grid-template-columns: minmax(0, 1.02fr) minmax(330px, .98fr); }
+    .return-manuscript { display: flex; flex-direction: column; padding: 17px; }
+    .return-manuscript::before { display: none; }
+    .return-folio-head { display: flex; justify-content: space-between; gap: 12px; color: #e3bd88; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+    .return-folio-head span:last-child { color: #899d98; }
+    .return-folio-title { margin: 20px 0 8px; color: #f4dfbb; font: italic 25px Georgia, serif; }
+    .return-folio-title small { display: block; margin-top: 6px; color: #91a49e; font: 10px/1.4 Inter, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+    .return-archive-map { position: relative; flex: 1; min-height: 300px; overflow: hidden; border: 1px solid rgba(213,139,82,.26); border-radius: 12px; background: radial-gradient(circle at 51% 50%, rgba(213,139,82,.16), transparent 23%), linear-gradient(145deg, rgba(35,55,58,.6), rgba(7,18,26,.68)); }
+    .return-archive-map::before { content: "TRACE THE ARGUMENT"; position: absolute; top: 15px; left: 16px; color: rgba(240,182,120,.72); font-size: 9px; letter-spacing: .16em; }
+    .return-archive-map::after { content: "evidence → theme → question"; position: absolute; right: 16px; bottom: 13px; color: #758c87; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .return-route-line { position: absolute; top: 52%; left: 11%; width: 78%; height: 1px; background: linear-gradient(90deg, rgba(213,139,82,.08), rgba(213,139,82,.7), rgba(143,196,155,.75), rgba(213,139,82,.08)); transform: rotate(-12deg) scaleX(.72); transform-origin: left; opacity: .7; transition: opacity .4s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+    .return-route-line::before, .return-route-line::after { content: ""; position: absolute; top: -3px; width: 7px; height: 7px; border: 1px solid #f0c28e; border-radius: 50%; background: #172b31; box-shadow: 0 0 0 5px rgba(240,194,142,.08); }
+    .return-route-line::before { left: 24%; } .return-route-line::after { right: 11%; }
+    .return-archive-map.assembled .return-route-line { opacity: 1; transform: rotate(-12deg) scaleX(1); }
+    .return-node { position: absolute; z-index: 2; display: grid; gap: 3px; min-width: 94px; padding: 9px 10px; border: 1px solid rgba(255,255,255,.18); border-radius: 9px; color: #a9bbb5; background: rgba(7,18,26,.78); transition: .35s ease; }
+    .return-node span { color: #d9a76e; font-size: 9px; letter-spacing: .13em; }
+    .return-node strong { color: #e9dfcd; font: 500 14px Georgia, serif; }
+    .return-node small { color: #819793; font: 9px/1.3 Inter, sans-serif; }
+    .return-node.node-authority { top: 18%; left: 10%; }
+    .return-node.node-knowledge { top: 43%; left: 42%; }
+    .return-node.node-representation { bottom: 16%; right: 10%; }
+    .return-node.active { border-color: #e0af75; background: rgba(213,139,82,.16); box-shadow: 0 0 24px rgba(213,139,82,.14); transform: translateY(-3px); }
+    .return-node.node-knowledge.active { border-color: #8fc49b; background: rgba(110,160,128,.14); box-shadow: 0 0 24px rgba(110,160,128,.14); }
+    .return-node.node-representation.active { border-color: #c3b6df; background: rgba(146,127,177,.14); box-shadow: 0 0 24px rgba(146,127,177,.14); }
+    .return-node { display: none; }
+    .return-archive-map.assembled .return-node { animation: nodeArrive .7s cubic-bezier(.2,.8,.2,1) both; }
+    .return-archive-map.assembled .node-knowledge { animation-delay: .12s; }
+    .return-archive-map.assembled .node-representation { animation-delay: .24s; }
+    .return-token { position: absolute; z-index: 3; appearance: none; padding: 7px 9px; border: 1px solid rgba(255,255,255,.2); border-radius: 4px; color: #c1d0c6; background: rgba(9,20,25,.72); cursor: pointer; font: 10px Georgia, serif; transition: .3s ease; }
+    .return-token:hover, .return-token.active { color: #fff0d4; border-color: #e0af75; background: rgba(213,139,82,.18); transform: translateY(-3px) rotate(0deg); }
+    .return-token.route { top: 16%; left: 9%; color: #e5b477; transform: rotate(-4deg); }
+    .return-token.quote { top: 31%; right: 9%; color: #e3c395; transform: rotate(5deg); }
+    .return-token.flora { bottom: 31%; left: 9%; color: #9fc8a5; transform: rotate(4deg); }
+    .return-token.gaze { bottom: 16%; right: 9%; color: #c3b3db; transform: rotate(-5deg); }
+    .return-seal { position: absolute; top: 50%; left: 50%; z-index: 1; display: grid; place-items: center; width: 112px; height: 112px; border: 1px solid rgba(245,220,169,.6); border-radius: 50%; color: #f3dfb5; background: radial-gradient(circle, rgba(213,139,82,.22), rgba(8,17,29,.06) 67%); transform: translate(-50%, -50%); box-shadow: 0 0 0 10px rgba(213,139,82,.035), 0 0 35px rgba(213,139,82,.13); transition: .5s ease; }
+    .return-seal strong { font: 500 18px Georgia, serif; letter-spacing: .04em; }
+    .return-seal small { margin-top: 5px; color: #d8b67e; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+    .return-archive-map.assembled .return-seal { border-color: #f0c28e; box-shadow: 0 0 0 10px rgba(213,139,82,.08), 0 0 55px rgba(213,139,82,.28); }
+    @keyframes nodeArrive { from { opacity: .35; transform: translateY(12px) scale(.94); } to { opacity: 1; transform: translateY(-3px) scale(1); } }
+    .return-manuscript > p { position: static; margin: 12px 0 0; color: #acb9b1; font: 12px/1.45 Georgia, serif; }
+    .return-themes { display: flex; flex-direction: column; gap: 10px; padding: 17px; }
+    .return-manuscript, .return-themes { min-height: 520px; }
+    .return-theme-list { display: grid; grid-template-columns: 1fr; gap: 7px; flex: 0 0 auto; }
+    .return-theme-list .theme-card { position: relative; display: flex; min-height: 68px; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; padding: 10px 11px; }
+    .return-theme-list .theme-card .theme-index { display: block; min-height: 0; height: auto; border: 0; font-size: 10px; }
+    .theme-card small { display: block; color: #c59a68; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+    .theme-card:nth-child(2) small { color: #8fc49b; } .theme-card:nth-child(3) small { color: #c3b3db; }
+    .return-theme-list .theme-card h3 { margin: 5px 0 0; font-size: 17px; }
+    .return-theme-list .theme-card p { display: none; }
+    .return-theme-list .theme-card i { position: absolute; right: 11px; bottom: 10px; color: #718680; font-style: normal; font-size: 15px; }
+    .return-theme-list .theme-card.active { transform: translateY(-3px); border-color: #e0af75; background: linear-gradient(145deg, rgba(213,139,82,.2), rgba(213,139,82,.05)); }
+    .return-theme-list .theme-card:nth-child(2).active { border-color: #8fc49b; background: linear-gradient(145deg, rgba(110,160,128,.16), rgba(110,160,128,.04)); }
+    .return-theme-list .theme-card:nth-child(3).active { border-color: #c3b3db; background: linear-gradient(145deg, rgba(146,127,177,.16), rgba(146,127,177,.04)); }
+    .return-theme-detail { min-height: 120px; padding: 16px; border-left: 2px solid #dca86d; color: #c2cfca; background: rgba(8,17,29,.36); font: 14px/1.5 Georgia, serif; animation: returnDetailIn .35s ease both; flex: 0 0 auto; }
+    .return-theme-detail strong { display: block; margin-bottom: 6px; color: #f2d09f; font: 500 20px Georgia, serif; }
+    .return-theme-detail p { margin: 0; color: #b7c7c0; }
+    .return-theme-detail .return-jump { margin-top: 13px; padding: 6px 10px; border: 1px solid rgba(213,139,82,.46); border-radius: 999px; color: #e0b276; background: transparent; cursor: pointer; font-size: 10px; }
+    .return-theme-detail .return-jump:hover { background: rgba(213,139,82,.12); }
+    @keyframes returnDetailIn { from { opacity: .2; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+    .return-assemble { appearance: none; width: 100%; min-height: 46px; padding: 12px 14px; border: 1px solid rgba(213,139,82,.62); border-radius: 9px; color: #f0c28e; background: rgba(213,139,82,.08); cursor: pointer; text-align: left; font: 500 13px Georgia, serif; transition: .25s ease; flex: 0 0 auto; }
+    .return-assemble span { float: right; color: #9baea6; font: 10px Inter, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+    .return-assemble:hover, .return-assemble.active { color: #101b22; background: #efc58d; }
+    .return-geometry { position: absolute; inset: 18% 17%; pointer-events: none; transform: rotate(calc((var(--balance) - 50) * .18deg)); transition: transform .25s ease; }
+    .return-geometry::before, .return-geometry::after { content: ""; position: absolute; inset: 12% 19%; border: 1px solid rgba(213,139,82,.25); border-radius: 50%; transform: rotate(calc((var(--depth) - 50) * .28deg)) scaleY(calc(.72 + var(--depth) * .002)); transition: transform .25s ease, border-color .25s ease; }
+    .return-geometry::after { inset: 18% 5%; border-color: rgba(143,196,155,.22); transform: rotate(calc((50 - var(--depth)) * .3deg)) scaleY(calc(.8 + var(--balance) * .0015)); }
+    .geo-axis { position: absolute; top: 50%; left: 4%; width: 92%; height: 1px; background: linear-gradient(90deg, transparent, rgba(213,139,82,.65), rgba(143,196,155,.65), transparent); transform: rotate(calc((var(--depth) - 50) * -.22deg)); transition: transform .25s ease; }
+    .geo-axis::before, .geo-axis::after { content: ""; position: absolute; top: -3px; width: 7px; height: 7px; border: 1px solid #e7be82; border-radius: 50%; background: #14282e; }
+    .geo-axis::before { left: calc(var(--balance) * 1%); } .geo-axis::after { right: calc(var(--depth) * .75%); border-color: #9dc9a7; }
+    .geo-core { position: absolute; top: 50%; left: calc(20% + var(--balance) * .6%); display: grid; place-items: center; width: 88px; height: 88px; border: 1px solid rgba(245,220,169,.65); border-radius: 50%; background: radial-gradient(circle, rgba(213,139,82,.2), rgba(8,17,29,.03) 70%); transform: translate(-50%, -50%) scale(calc(.84 + var(--depth) * .003)); transition: left .25s ease, transform .25s ease, box-shadow .25s ease; box-shadow: 0 0 calc(18px + var(--depth) * .22px) rgba(213,139,82,.15); }
+    .geo-core strong { color: #f4dfba; font: 500 12px Georgia, serif; letter-spacing: .08em; }
+    .geo-core small { margin-top: 4px; color: #d4b07d; font: 8px Inter, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    .return-lab { flex: 0 0 auto; padding: 12px 14px; border: 1px solid rgba(143,196,155,.24); border-radius: 10px; background: rgba(8,17,29,.32); }
+    .return-lab-head { display: flex; justify-content: space-between; gap: 12px; color: #cfe0d3; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+    .return-lab-head span:last-child { color: #8fa59a; }
+    .return-range { display: grid; grid-template-columns: 130px minmax(0,1fr) 62px; align-items: center; gap: 9px; margin-top: 10px; color: #aebdb7; font: 11px Georgia, serif; }
+    .return-range output { color: #dcb37b; text-align: right; font: 9px Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+    .return-range input { width: 100%; accent-color: #dca86d; cursor: ew-resize; }
+    .return-range input[data-return-range="depth"] { accent-color: #8fc49b; }
+    .return-bottom { display: grid; gap: 8px; }
+    .return-question-panel { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 8px 0 0; }
+    .return-question-panel p { margin: 0; color: #a9bbb3; font: 13px/1.4 Georgia, serif; }
+    .return-question-options { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    .return-question-chip { appearance: none; padding: 6px 9px; border: 1px solid rgba(255,255,255,.15); border-radius: 999px; color: #aebdb7; background: rgba(255,255,255,.035); cursor: pointer; font-size: 10px; transition: .2s ease; }
+    .return-question-chip:hover, .return-question-chip.active { border-color: #dca86d; color: #f0c28e; background: rgba(213,139,82,.1); }
+    @media (max-width: 1050px) and (min-width: 851px) {
+      .description-main { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); }
+      .encounter-body, .position-body, .return-body { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); }
+      .encounter-title, .position-title, .return-title { font-size: clamp(36px, 4.8vw, 56px); }
+      .encounter-question-head, .position-question-head, .return-question-head { font-size: 17px; }
+      .encounter-logic, .position-frameworks, .return-themes { padding: 13px; }
+      .encounter-logic h3 { font-size: 19px; }
+      .encounter-logic p, .framework-card p { font-size: 11px; }
+      .framework-card { min-height: 100px; }
+      .theme-card { grid-template-columns: 72px minmax(0, 1fr); }
+      .theme-card h3 { font-size: 16px; }
+
+      .description-title { font-size: clamp(36px, 4.8vw, 56px); }
+      .description-question { font-size: 17px; }
+      .script-card { padding: 12px; }
+      .stage-control { min-height: 48px; }
+      .stage-control strong { font-size: 13px; }
+      .script-reading h3 { font-size: 18px; }
+      .script-reading p { font-size: 11px; }
+      .manuscript-strip p { font-size: 13px; }
+      .comparison-card { grid-template-columns: minmax(0, .75fr) minmax(0, 1.15fr) minmax(0, .75fr) 96px; padding: 10px; }
+      .compare-copy blockquote { font-size: 13px; }
+      .compare-action { font-size: 10px; }
+      .comparison-note { right: 113px; font-size: 8px; }
+    }
+    /* Scene 06 — reciprocal looking without equal power */
+    .encounter-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 78% 32%, rgba(84,116,84,.18), transparent 36%), #08111d; }
+    .encounter-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.94), rgba(8,17,29,.52)); }
+    .encounter-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .encounter-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 13px; }
+    .encounter-header, .position-header, .return-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .5fr); gap: 26px; align-items: end; }
+    .encounter-header .eyebrow, .position-header .eyebrow, .return-header .eyebrow { margin-bottom: 10px; }
+    .encounter-title, .position-title, .return-title { margin: 0; color: #f5eee2; font: 500 clamp(40px, 5.2vw, 70px)/.94 Georgia, serif; letter-spacing: -.065em; }
+    .encounter-title em { color: #a8c7a7; font-weight: 400; }
+    .encounter-question-head, .position-question-head, .return-question-head { align-self: end; padding: 0 0 3px 17px; border-left: 1px solid rgba(143,196,155,.72); color: #d8e6d5; font: italic 20px/1.25 Georgia, serif; }
+    .encounter-question-head small, .position-question-head small, .return-question-head small { display: block; margin-top: 8px; color: #859998; font: 9px/1.4 Inter, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+    .encounter-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(280px, .82fr); gap: 13px; }
+    .encounter-stage { position: relative; min-height: 0; padding: 13px; border: 1px solid rgba(143,196,155,.34); border-radius: 16px; background: rgba(14,34,38,.78); overflow: hidden; }
+    .encounter-canvas { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: calc(100% - 48px); min-height: 330px; overflow: hidden; border: 1px solid rgba(255,255,255,.13); background: #12272c; }
+    .encounter-half { position: relative; overflow: hidden; transition: transform .75s cubic-bezier(.2,.75,.24,1), filter .75s ease, opacity .75s ease; }
+    .encounter-half::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,19,25,.06), rgba(7,19,25,.66)); }
+    .encounter-half::after { position: absolute; top: 13px; left: 13px; color: rgba(239,218,177,.82); font: 9px Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    .encounter-half.europe-half { background: linear-gradient(120deg, rgba(23,48,55,.44), rgba(8,18,25,.1)), url('hero.png') 72% center/cover; }
+    .encounter-half.europe-half::after { content: "European visitors"; }
+    .encounter-half.local-half { background: linear-gradient(120deg, rgba(85,104,69,.3), rgba(11,28,29,.2)), url('hero.png') 26% center/cover; }
+    .encounter-half.local-half::after { content: "local residents"; }
+    .encounter-half .gaze-mark { position: absolute; top: 52%; width: 58%; height: 1px; background: linear-gradient(90deg, transparent, rgba(241,209,150,.82)); }
+    .europe-half .gaze-mark { right: 0; transform-origin: right; }
+    .local-half .gaze-mark { left: 0; transform-origin: left; opacity: .38; background: linear-gradient(90deg, rgba(143,196,155,.82), transparent); }
+    .encounter-half .gaze-mark::after { content: ""; position: absolute; top: -3px; width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 50%; color: #f1d196; }
+    .europe-half .gaze-mark::after { right: 0; } .local-half .gaze-mark::after { left: 0; color: #8fc49b; }
+    .encounter-canvas.reversed .europe-half { order: 2; filter: saturate(.56) brightness(.85); transform: scaleX(-1); }
+    .encounter-canvas.reversed .local-half { order: 1; filter: saturate(1.05) brightness(1.05); }
+    .encounter-canvas.reversed .europe-half::after { transform: scaleX(-1); left: auto; right: 13px; color: #b6aaa0; }
+    .encounter-canvas.reversed .local-half::after { color: #d6e4c7; }
+    .encounter-center-label { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 9px 11px; border: 1px solid rgba(241,209,150,.6); color: #f5e4c2; background: rgba(8,19,24,.73); font: 9px Inter, sans-serif; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; transition: .5s ease; }
+    .encounter-canvas.reversed .encounter-center-label { border-color: rgba(143,196,155,.72); color: #d1e9d0; }
+    .encounter-stage-caption { display: flex; justify-content: space-between; gap: 10px; padding: 10px 2px 0; color: #99aeaa; font: 11px/1.3 Georgia, serif; }
+    .encounter-stage-caption strong { color: #e6ca96; font-weight: 400; }
+    .encounter-controls { position: absolute; right: 14px; bottom: 10px; }
+    .reverse-action, .mediation-action { border: 1px solid rgba(213,139,82,.65); border-radius: 999px; padding: 9px 13px; color: #f0c28e; background: rgba(213,139,82,.1); cursor: pointer; font: 500 12px Georgia, serif; transition: .2s ease; }
+    .reverse-action:hover, .mediation-action:hover, .mediation-action.active { color: #13221f; background: #e1b379; }
+    .encounter-logic { min-height: 0; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: 11px; padding: 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 16px; background: rgba(13,31,37,.82); }
+    .logic-label { color: #9ac1a2; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+    .encounter-logic h3 { margin: 0; color: #f1ead8; font: 500 23px/1.1 Georgia, serif; }
+    .encounter-logic p { margin: 0; color: #afbfbb; font: 13px/1.52 Georgia, serif; }
+    .logic-question { align-self: end; padding: 13px 0 13px 14px; border-left: 2px solid #8fb79d; color: #f1dfbb; font: italic 20px/1.25 Georgia, serif; }
+    .mediation-action { justify-self: start; }
+    .encounter-overlay { position: absolute; z-index: 8; inset: 10px; display: grid; place-items: center; padding: 24px; border: 1px solid rgba(238,210,159,.7); background: rgba(228,217,187,.16); backdrop-filter: blur(3px); animation: overlayIn .55s ease both; }
+    .encounter-overlay::before { content: "MANUSCRIPT OVERLAY / NARRATION LAYER"; position: absolute; top: 13px; left: 15px; color: rgba(245,223,180,.78); font-size: 8px; letter-spacing: .14em; }
+    .encounter-overlay blockquote { max-width: 590px; margin: 0; color: #fff0d0; text-align: center; text-shadow: 0 2px 15px rgba(4,12,16,.7); font: italic clamp(22px, 3vw, 34px)/1.2 Georgia, serif; }
+    .encounter-overlay p { max-width: 480px; margin: 15px 0 0; color: #f0e7cf; text-align: center; font: 13px/1.45 Georgia, serif; }
+    @keyframes overlayIn { from { opacity: 0; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
+    .encounter-footer { padding: 3px 0 0; color: #cbdcc9; font: italic 16px/1.25 Georgia, serif; }
+    .encounter-footer strong { color: #8fc49b; font-weight: 400; }
+
+    /* Scene 07 — a narrator between frameworks */
+    .position-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 25% 34%, rgba(213,139,82,.12), transparent 34%), #08111d; }
+    .position-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.95), rgba(8,17,29,.55)); }
+    .position-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .position-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 13px; }
+    .position-title em { color: #e2b27a; font-weight: 400; }
+    .position-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(280px, .92fr); gap: 13px; }
+    .position-map { position: relative; min-height: 0; overflow: hidden; border: 1px solid rgba(213,139,82,.34); border-radius: 16px; background: radial-gradient(circle at 50% 50%, rgba(213,139,82,.19), transparent 24%), linear-gradient(145deg, rgba(26,48,55,.9), rgba(10,19,27,.93)); }
+    .position-map::before { content: "THE NARRATOR / POSITION MAP"; position: absolute; top: 15px; left: 17px; color: rgba(240,182,120,.78); font-size: 9px; letter-spacing: .15em; }
+    .position-map::after { content: "two frameworks / one voice"; position: absolute; right: 17px; bottom: 14px; color: #869b98; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .framework-orbit { position: absolute; top: 50%; left: 50%; width: 47%; height: 72%; border: 1px solid rgba(213,139,82,.45); border-radius: 50%; transform: translate(-77%, -50%) rotate(-13deg); transition: .5s ease; }
+    .framework-orbit.europe-orbit { border-color: rgba(143,196,155,.5); transform: translate(-23%, -50%) rotate(13deg); }
+    .framework-orbit.active { box-shadow: 0 0 45px rgba(213,139,82,.14); background: rgba(213,139,82,.08); }
+    .framework-orbit.europe-orbit.active { box-shadow: 0 0 45px rgba(143,196,155,.14); background: rgba(143,196,155,.07); }
+    .orbit-caption { position: absolute; top: 16%; left: 15%; color: #e3b27b; font: 500 14px Georgia, serif; transform: rotate(-13deg); }
+    .europe-orbit .orbit-caption { top: 16%; left: auto; right: 10%; color: #a7d0af; transform: rotate(13deg); text-align: right; }
+    .behn-core { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid; place-items: center; width: 150px; height: 150px; border: 1px solid rgba(245,220,169,.78); border-radius: 50%; color: #fff1d5; background: radial-gradient(circle, rgba(213,139,82,.3), rgba(8,17,29,.08) 68%); transform: translate(-50%, -50%); box-shadow: 0 0 0 14px rgba(213,139,82,.035), 0 0 55px rgba(213,139,82,.16); }
+    .behn-core strong { font: 500 25px Georgia, serif; }
+    .behn-core small { margin-top: 5px; color: #d8b67e; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; transform: translateY(-8px); }
+    .position-frameworks { min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 10px; padding: 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 16px; background: rgba(13,31,37,.82); }
+    .position-frameworks > header { display: flex; justify-content: space-between; gap: 10px; color: #e3c394; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .position-frameworks > header span:last-child { color: #7d9291; }
+    .framework-list { display: grid; gap: 8px; align-content: start; }
+    .framework-card { appearance: none; min-height: 118px; padding: 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 11px; color: #a9bab6; background: rgba(255,255,255,.035); cursor: pointer; text-align: left; transition: .3s ease; }
+    .framework-card:hover { transform: translateY(-2px); border-color: rgba(213,139,82,.65); }
+    .framework-card.active { border-color: #e0af75; background: linear-gradient(145deg, rgba(213,139,82,.18), rgba(213,139,82,.05)); }
+    .framework-card.europe-card.active { border-color: #8fc49b; background: linear-gradient(145deg, rgba(110,160,128,.16), rgba(110,160,128,.04)); }
+    .framework-card small { color: #c59a68; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .framework-card.europe-card small { color: #8fc49b; }
+    .framework-card h3 { margin: 8px 0 6px; color: #f5ead8; font: 500 20px Georgia, serif; }
+    .framework-card p { margin: 0; color: #aebdbc; font: 12px/1.45 Georgia, serif; }
+    .position-reading { min-height: 68px; padding: 13px 14px; border-left: 2px solid #dca86d; color: #c2cfca; background: rgba(8,17,29,.35); font: 14px/1.45 Georgia, serif; }
+    .position-reading strong { color: #f2d09f; font-weight: 400; }
+    .position-footer { padding: 3px 0 0; color: #d9c49d; font: italic 16px/1.25 Georgia, serif; }
+
+    /* Scene 08 — return to the page */
+    .return-scene { min-height: 100vh; padding: 82px clamp(22px, 4.6vw, 70px) 30px; display: block; background: radial-gradient(circle at 74% 23%, rgba(213,139,82,.14), transparent 34%), #08111d; }
+    .return-scene::before { background: linear-gradient(90deg, rgba(8,17,29,.95), rgba(8,17,29,.55)); }
+    .return-scene .section-inner { width: min(1180px, 100%); height: calc(100vh - 112px); min-height: 660px; }
+    .return-page { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 13px; }
+    .return-title em { color: #e0b276; font-weight: 400; }
+    .return-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(290px, .9fr); gap: 13px; }
+    .return-manuscript { position: relative; min-height: 0; overflow: hidden; padding: 19px; border: 1px solid rgba(213,139,82,.4); border-radius: 16px; background: linear-gradient(145deg, rgba(91,73,51,.33), rgba(21,38,42,.85)); }
+    .return-manuscript::before { content: "FINAL FOLIO / RETURN TO THE PAGE"; position: absolute; top: 15px; left: 19px; color: rgba(240,182,120,.8); font-size: 9px; letter-spacing: .15em; }
+    .folio-title { position: absolute; top: 50px; left: 19px; color: #f4dfbb; font: italic 26px Georgia, serif; }
+    .folio-route { position: absolute; top: 47%; left: 12%; width: 69%; height: 1px; background: linear-gradient(90deg, rgba(213,139,82,.05), rgba(213,139,82,.8), rgba(143,196,155,.65), rgba(213,139,82,.05)); transform: rotate(-12deg); }
+    .folio-route::after { content: ""; position: absolute; right: 10%; top: -3px; width: 7px; height: 7px; border: 1px solid #f0c28e; border-radius: 50%; background: #172b31; box-shadow: 0 0 0 5px rgba(240,194,142,.1); }
+    .folio-token { position: absolute; padding: 7px 9px; border: 1px solid rgba(255,255,255,.2); color: #c1d0c6; background: rgba(9,20,25,.5); font: 10px Georgia, serif; transform: rotate(-4deg); }
+    .folio-token.route { top: 27%; left: 15%; color: #e5b477; } .folio-token.quote { top: 32%; right: 13%; color: #e3c395; transform: rotate(5deg); } .folio-token.flora { bottom: 24%; left: 18%; color: #9fc8a5; transform: rotate(4deg); } .folio-token.gaze { bottom: 21%; right: 16%; color: #b7c9c1; transform: rotate(-5deg); }
+    .return-manuscript p { position: absolute; bottom: 19px; left: 19px; right: 19px; margin: 0; color: #acb9b1; font: 13px/1.45 Georgia, serif; }
+    .return-themes { min-height: 0; display: grid; grid-template-rows: auto repeat(3, 1fr); gap: 8px; padding: 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 16px; background: rgba(13,31,37,.82); }
+    .return-themes > header { display: flex; justify-content: space-between; color: #e3c394; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .return-themes > header span:last-child { color: #7d9291; }
+    .theme-card { appearance: none; display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; align-items: center; padding: 11px; border: 1px solid rgba(255,255,255,.14); border-radius: 10px; color: #aebdbc; background: rgba(255,255,255,.035); cursor: pointer; text-align: left; transition: .25s ease; }
+    .theme-card:hover { transform: translateX(3px); border-color: rgba(213,139,82,.65); background: rgba(213,139,82,.1); }
+    .theme-card h3 { margin: 0 0 5px; color: #f5e9d4; font: 500 19px Georgia, serif; }
+    .theme-card p { margin: 0; color: #aebdbc; font: italic 11px/1.35 Georgia, serif; }
+    .theme-index { display: grid; place-items: center; height: 100%; min-height: 52px; border-right: 1px solid rgba(213,139,82,.45); color: #e4b77e; font: 500 12px Georgia, serif; letter-spacing: .08em; }
+    .return-conclusion { padding: 12px 14px; border-top: 1px solid #d9a56b; color: #f1dfbf; background: linear-gradient(180deg, rgba(213,139,82,.13), transparent); font: italic 18px/1.3 Georgia, serif; }
+    .return-question { margin: 8px 0 0; color: #a9bbb3; font: 13px/1.4 Georgia, serif; }
+    @media (max-width: 1050px) and (min-width: 851px) {
+      .authority-body { grid-template-columns: minmax(0, .78fr) minmax(0, 1fr); }
+      .authority-header { grid-template-columns: minmax(0, 1fr) minmax(205px, .55fr); gap: 16px; }
+      .authority-title { font-size: clamp(38px, 5vw, 58px); }
+      .authority-question { font-size: 18px; }
+      .authority-board { padding: 14px; }
+      .basis-card { padding: 10px 8px; }
+      .basis-card strong { font-size: 14px; }
+      .basis-card span { font-size: 9px; }
+      .witness-core-mark { width: 138px; height: 138px; }
+      .witness-core-mark strong { font-size: 126px; }
+      .portrait-caption { font-size: 11px; }
+      .archive-mini { grid-template-columns: minmax(0, 1fr) 112px; }
+      .tension-button-compact { font-size: 11px; padding: 8px; }
+    }
     @media (max-width: 850px) {
       .app { display: block; }
       .rail { position: fixed; width: 100%; height: auto; inset: 0 0 auto; padding: 14px 18px; display: flex; flex-direction: row; align-items: center; gap: 18px; }
@@ -198,6 +770,26 @@
       .observe-stage { grid-template-columns: 1fr; }
       .landscape { height: 250px; }
       .progress { left: 0; }
+      .genre-board-body { grid-template-columns: 1fr; }
+      .genre-instruction, .zone-scroll, .feature-deck, .connection-note { grid-column: 1; }
+      .feature-deck { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
+      .authority-scene .section-inner, .description-scene .section-inner { height: auto; min-height: 0; }
+      .encounter-scene .section-inner, .position-scene .section-inner, .return-scene .section-inner { height: auto; min-height: 0; }
+      .authority-page, .description-page, .encounter-page, .position-page, .return-page { height: auto; }
+      .authority-header { grid-template-columns: 1fr; gap: 11px; }
+      .authority-question { max-width: 380px; }
+      .authority-body, .description-main, .encounter-body, .position-body, .return-body { grid-template-columns: 1fr; }
+      .witness-portrait { min-height: 450px; }
+      .field-card { min-height: 430px; }
+      .encounter-stage { min-height: 440px; }
+      .position-map { min-height: 420px; }
+      .return-manuscript { min-height: 380px; }
+      .witness-intro { grid-template-columns: 1fr; gap: 14px; }
+      .witness-question { max-width: none; }
+      .witness-core { grid-template-columns: 108px minmax(0, 1fr); gap: 19px; }
+      .witness-i strong { font-size: 116px; }
+      .archive-rack { grid-template-columns: repeat(3, 1fr); }
+      .archive-file:nth-child(4), .archive-file:nth-child(5) { display: none; }
     }
     @media (max-width: 540px) {
       .grid-4, .grid-3, .final-grid, .frames, .tension { grid-template-columns: 1fr; }
@@ -211,7 +803,97 @@
       h2 { font-size: 52px; }
       .feature-deck { grid-template-columns: 1fr 1fr; }
       .genre-board-body { padding: 15px; }
+      .witness-stage { padding: 24px 17px 20px; }
+      .witness-core { grid-template-columns: 1fr; gap: 16px; }
+      .witness-i { min-height: 100px; border-right: 0; border-bottom: 1px solid rgba(213,139,82,.28); }
+      .witness-i strong { font-size: 96px; }
+      .witness-i span { bottom: 8px; }
+      .authority-chain { grid-template-columns: 1fr; gap: 8px; }
+      .authority-node { min-height: 74px; }
+      .authority-node:not(:last-child)::after { content: "↓"; top: auto; bottom: -21px; right: 50%; transform: translateX(50%); }
+      .authority-evidence-grid { grid-template-columns: 1fr; }
+      .authority-evidence-card { min-height: 116px; }
+      .archive-stage { padding: 19px 15px 20px; }
+      .archive-head { display: block; }
+      .archive-head span { display: block; margin-top: 6px; }
+      .archive-rack { grid-template-columns: repeat(2, 1fr); padding: 15px 10px 12px; }
+      .archive-file:nth-child(3) { display: none; }
+      .archive-caption { display: block; }
+      .archive-caption p { margin-bottom: 14px; }
+      .tension-reading { grid-template-columns: 1fr; }
+      .tension-reading article:first-child { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+      .authority-conclusion { font-size: 20px; }
+      .authority-scene { padding-top: 92px; }
+      .description-scene { padding-top: 92px; }
+      .encounter-scene, .position-scene, .return-scene { padding-top: 92px; }
+      .encounter-header, .position-header, .return-header { grid-template-columns: 1fr; gap: 10px; }
+      .encounter-question-head, .position-question-head, .return-question-head { max-width: 380px; }
+      .encounter-canvas { min-height: 330px; }
+      .return-conclusion { margin-top: 4px; }
+      .description-header { grid-template-columns: 1fr; gap: 10px; }
+      .description-question { max-width: 380px; }
+      .comparison-card { grid-template-columns: 1fr 1fr; }
+      .compare-action { min-height: 48px; }
+      .comparison-note { display: none; }
+      .authority-title { font-size: 52px; }
+      .authority-body { gap: 12px; }
+      .witness-portrait { min-height: 420px; }
+      .authority-board { padding: 14px; }
+      .basis-grid { grid-template-columns: 1fr; }
+      .basis-card { min-height: 78px; }
+      .basis-card strong { margin: 8px 0 4px; }
+      .archive-mini { grid-template-columns: 1fr; }
+      .tension-button-compact { min-height: 44px; font-size: 11px; line-height: 1.15; }
+      .tension-button-compact span { display: block; margin-top: 4px; font-size: 8px; line-height: 1.2; }
+      .tension-panel-compact { grid-template-columns: 1fr; }
+      .tension-panel-compact article:first-child { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.11); }
+      .description-title { font-size: 50px; }
+      .encounter-title, .position-title, .return-title { font-size: 50px; }
+      .encounter-canvas { grid-template-columns: 1fr; min-height: 390px; }
+      .encounter-half.europe-half { min-height: 190px; }
+      .encounter-half.local-half { min-height: 190px; }
+      .encounter-center-label { top: 50%; }
+      .position-map { min-height: 360px; }
+      .framework-orbit { width: 53%; }
+      .behn-core { width: 128px; height: 128px; }
+      .return-manuscript { min-height: 310px; }
+      .return-body { gap: 10px; }
+      .theme-card { grid-template-columns: 64px minmax(0, 1fr); }
+
+      .description-main { gap: 10px; }
+      .field-card { min-height: 340px; }
+      .comparison-card { grid-template-columns: 1fr; }
+      .compare-view { min-height: 78px; }
+      .compare-copy { margin-top: 0; }
+      .compare-action { min-height: 42px; }
     }
+    @media (max-width: 850px) {
+      .return-theme-list .theme-card { min-height: 88px; }
+      .return-question-panel { align-items: flex-start; flex-direction: column; }
+      .return-question-options { justify-content: flex-start; }
+      .return-node { transform: scale(.88); transform-origin: center; }
+      .return-node.active { transform: scale(.88) translateY(-3px); }
+      .return-token.route { top: 16%; left: 7%; }
+      .return-token.quote { top: 31%; right: 7%; }
+      .return-token.flora { bottom: 31%; left: 7%; }
+      .return-token.gaze { bottom: 16%; right: 7%; }
+    }
+    /* Final scene 08 layout overrides: keep the instrument spacious at every viewport. */
+    .return-scene .section-inner { height: auto; min-height: calc(100vh - 112px); }
+    .return-page { height: auto; }
+    .return-manuscript { display: flex; flex-direction: column; min-height: 520px; padding: 17px; }
+    .return-manuscript::before { display: none; }
+    .return-manuscript > p { position: static; margin: 12px 0 0; }
+    .return-themes { display: flex; flex-direction: column; gap: 10px; min-height: 520px; padding: 17px; }
+    .return-theme-list { grid-template-columns: 1fr; flex: 0 0 auto; }
+    .return-theme-list .theme-card { display: flex; min-height: 68px; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; padding: 10px 11px; }
+    .return-theme-detail { flex: 0 0 auto; min-height: 120px; }
+    .return-lab { flex: 0 0 auto; }
+    .return-assemble { flex: 0 0 auto; min-height: 46px; }
+    .return-token.route { top: 16%; left: 9%; }
+    .return-token.quote { top: 31%; right: 9%; }
+    .return-token.flora { bottom: 31%; left: 9%; }
+    .return-token.gaze { bottom: 16%; right: 9%; }
   </style>
 </head>
 <body>
@@ -236,14 +918,14 @@
   </aside>
   <script>
     const scenes = [
-      { key: 'entry', short: 'Entry', title: "Through the Traveller's Eye", label: 'Prologue', evidence: 'This opening frames Oroonoko as a text that moves between history, fiction, and travel writing. The narrator’s claim to truth is part of the work’s authority, not a neutral guarantee.' },
-      { key: 'conditions', short: 'Conditions', title: 'How did travel become knowledge?', label: '01 · Origins', evidence: 'The presentation identifies four connected conditions: philosophical empiricism, colonial and maritime expansion, the Grand Tour, and exchange between travel writing and the early novel.' },
-      { key: 'boundaries', short: 'Boundaries', title: 'Where does a genre begin?', label: '02 · Boundaries', evidence: 'Travel writing is treated as a hybrid formation. First-person narration, empirical description, and sequential movement can belong to both travel narrative and fiction.' },
-      { key: 'authority', short: 'Authority', title: 'Who gets to be a witness?', label: '03 · Witnessing', evidence: 'The narrator builds credibility through presence, testimony, and the claim to preserve a story absent from official archives. “Only a female pen” becomes a productive tension.' },
-      { key: 'description', short: 'Description', title: 'When a landscape becomes knowledge', label: '04 · Describing', evidence: 'In the presentation, description is an active knowledge-making practice. Surinam becomes legible through cataloguing, comparison, and European cultural reference points.' },
-      { key: 'encounter', short: 'Encounter', title: 'When the gaze turns back', label: '05 · Encounter', evidence: 'The contact-zone model emphasizes co-presence and unequal power. Indigenous curiosity makes the encounter reciprocal, but the final account remains mediated by the European narrator.' },
-      { key: 'position', short: 'Position', title: 'A narrator between frameworks', label: '06 · Position', evidence: 'Behn can challenge the exclusivity of masculine travel authority while still interpreting colonial subjects through a European representational framework.' },
-      { key: 'return', short: 'Return', title: 'What the story leaves behind', label: '07 · Significance', evidence: 'The final claim is that travel-writing conventions help Oroonoko establish narrative authority, construct colonial knowledge, and expose the tensions of cultural encounter.' }
+      { key: 'entry', number: '01', short: 'Entry', title: "Through the Traveller's Eye", label: 'Prologue', evidence: 'This opening frames Oroonoko as a text that moves between history, fiction, and travel writing. The narrator’s claim to truth is part of the work’s authority, not a neutral guarantee.' },
+      { key: 'conditions', number: '02', short: 'Conditions', title: 'How did travel become knowledge?', label: '02 · Origins', evidence: 'The presentation identifies four connected conditions: philosophical empiricism, colonial and maritime expansion, the Grand Tour, and exchange between travel writing and the early novel.' },
+      { key: 'boundaries', number: '03', short: 'Boundaries', title: 'Where does a genre begin?', label: '03 · Boundaries', evidence: 'Travel writing is treated as a hybrid formation. First-person narration, empirical description, and sequential movement can belong to both travel narrative and fiction.' },
+      { key: 'authority', number: '04', short: 'Authority', title: 'How does witness authority form?', label: '04 · Witnessing', evidence: 'The presentation traces authority through three linked claims: presence, testimony, and preservation. “Only a female pen” is read as both a modesty claim and a way to name the narrator’s archival work.' },
+      { key: 'description', number: '05', short: 'Description', title: 'When a landscape becomes knowledge', label: '05 · Describing', evidence: 'In the presentation, description is an active knowledge-making practice. Surinam becomes legible through cataloguing, comparison, and European cultural reference points.' },
+      { key: 'encounter', number: '06', short: 'Encounter', title: 'When the gaze turns back', label: '06 · Encounter', evidence: 'The contact-zone model emphasizes co-presence and unequal power. Indigenous curiosity makes the encounter reciprocal, but the final account remains mediated by the European narrator.' },
+      { key: 'position', number: '07', short: 'Position', title: 'A narrator between frameworks', label: '07 · Position', evidence: 'Behn can challenge the exclusivity of masculine travel authority while still interpreting colonial subjects through a European representational framework.' },
+      { key: 'return', number: '08', short: 'Return', title: 'What the story leaves behind', label: '08 · Significance', evidence: 'The final claim is that travel-writing conventions help Oroonoko establish narrative authority, construct colonial knowledge, and expose the tensions of cultural encounter.' }
     ];
     let current = 0;
     const boundaryFeatures = [
@@ -253,7 +935,12 @@
       ['Movement through places', 'sequence', 'A route can record a journey and also provide the structure of a story.']
     ];
     const boundaryZones = ['documentary', 'travel', 'fiction'];
-    const state = { conditions: new Set(), boundaries: new Set(), boundaryPlacements: boundaryFeatures.map(() => new Set()), activeBoundaryFeature: null, authority: 'presence', description: 'observe', reversed: false, position: new Set(['gender', 'europe']) };
+    const authoritySteps = [
+      ['presence', 'Being there', 'presence', 'The “I” was there.', 'Physical presence turns a location into a claim: the narrator presents herself as someone who has seen the place.'],
+      ['testimony', 'Claiming truth', 'testimony', '“I” as witness.', 'The account borrows travel writing’s promise of firsthand testimony to resist the charge of invention.'],
+      ['archive', 'Preserving an otherwise unrecorded story', 'authority', '“only a female pen”.', 'The phrase sounds modest, yet it names the narrator as custodian of a history official archives failed to preserve.']
+    ];
+    const state = { conditions: new Set(), boundaries: new Set(), boundaryPlacements: boundaryFeatures.map(() => new Set()), activeBoundaryFeature: null, authoritySteps: new Set(), authorityTension: false, description: 'observe', descriptionCompare: false, reversed: false, encounterMediation: false, position: new Set(), returnFocus: null, returnAssembled: false, returnBalance: 52, returnDepth: 46 };
     const stage = document.getElementById('stage');
     const sceneList = document.getElementById('sceneList');
     const progressBar = document.getElementById('progressBar');
@@ -262,7 +949,7 @@
     const evidenceText = document.getElementById('evidenceText');
 
     function nav() {
-      sceneList.innerHTML = scenes.map((s, i) => `<button class="scene-btn ${i === current ? 'active' : ''}" data-go="${i}"><small>${String(i).padStart(2, '0')}</small><span>${s.short}</span></button>`).join('');
+      sceneList.innerHTML = scenes.map((s, i) => `<button class="scene-btn ${i === current ? 'active' : ''}" data-go="${i}"><small>${s.number || String(i + 1).padStart(2, '0')}</small><span>${s.short}</span></button>`).join('');
       progressBar.style.width = `${((current + 1) / scenes.length) * 100}%`;
     }
     let shouldAnimate = true;
@@ -298,11 +985,47 @@
         const connectionMarkup = sharedFeatures.length ? sharedFeatures.map(({ placements, i }) => `<div class="connection-row"><strong>${boundaryFeatures[i][0]}</strong>${Array.from(placements).map((zone, index) => `${index ? '<span class="line"></span>' : ''}<span class="pill">${zone === 'documentary' ? 'Documentary Record' : zone === 'travel' ? 'Travel Narrative' : 'Fiction'}</span>`).join('')}</div>`).join('') : '<p class="genre-empty">Place a card in two circles to reveal its shared connection.</p>';
         html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Where does a <em>genre</em> begin?</h2><p class="lede">Travel writing and fiction share techniques. Drag each card into one or more overlapping regions and watch the boundary become difficult to draw.</p><div class="genre-board"><div class="genre-board-head"><span>Genre overlap map</span><span>${placedCount} / 4 cards placed</span></div><div class="genre-board-body"><p class="genre-instruction">Drag a card onto a circle. For keyboard or touch, click a card to select it, then click a circle.</p><div class="zone-scroll"><div class="zone-canvas">${zoneMarkup}</div></div><div class="feature-deck">${featureMarkup}</div><div class="connection-note"><strong>Shared techniques make fixed boundaries difficult.</strong><p>${sharedFeatures.length ? 'The lines show where one device belongs to more than one narrative mode.' : 'The shared territory will appear when a card is placed in more than one region.'}</p><div class="connection-list">${connectionMarkup}</div></div></div></div><div class="quote-panel"><blockquote>Instead of asking what travel writing is, ask what it does.</blockquote><cite>A characteristic-based approach · after Borm, Hulme & Youngs, Thompson, and Pratt</cite></div></div>`);
       }
-      if (s.key === 'authority') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Who gets to be a <em>witness?</em></h2><p class="lede">In Oroonoko, the narrator’s “I” works as an authority marker. Select a link in the chain to see how credibility is staged.</p><div class="chain">${[['presence', 'Being there', 'on-site presence'], ['testimony', 'Claiming truth', 'firsthand observation'], ['archive', 'Preserving a story', 'a history left out']].map(x => `<button class="chain-step ${state.authority === x[0] ? 'active' : ''}" data-authority="${x[0]}"><strong>${x[1]}</strong><small>${x[2]}</small></button>`).join('')}</div><div class="quote-panel"><blockquote>${state.authority === 'archive' ? '“only a female pen”' : state.authority === 'testimony' ? '“Truth” rather than fabricated adventures' : 'The narrator’s physical presence in Surinam'}</blockquote><cite>${state.authority === 'archive' ? 'A modest phrase with a double edge.' : state.authority === 'testimony' ? 'A claim that sounds like travel-writing authority.' : 'Presence becomes proof.'}</cite></div><div class="tension"><div><strong>A constraint</strong>Female authorship can appear to weaken authority within a male-centred literary culture.</div><div><strong>A resource</strong>That same position lets Behn preserve a story missing from official history.</div></div></div>`);
-      if (s.key === 'description') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">When a landscape becomes <em>knowledge</em></h2><p class="lede">Observe, describe, classify. The sequence makes visible how a foreign environment is translated into an intelligible account.</p><div class="observe-stage"><div class="landscape ${state.description === 'observe' ? 'observing' : ''} ${state.description === 'classify' ? 'classified' : ''}" aria-label="Stylized Surinam landscape"><span class="tag one">flora</span><span class="tag two">local custom</span><span class="tag three">natural resource</span></div><div class="step-copy"><h3>${state.description === 'observe' ? 'Look closely.' : state.description === 'describe' ? 'Put experience into words.' : 'Turn details into a system.'}</h3><p>${state.description === 'observe' ? 'The scene is still a scene. Nothing has been sorted yet.' : state.description === 'describe' ? 'Description creates the impression of direct, empirical witness.' : 'Classification makes unfamiliar space legible—but never free from the observer’s frame.'}</p><div class="choice-row"><button class="choice ${state.description === 'observe' ? 'selected' : ''}" data-description="observe">Observe</button><button class="choice ${state.description === 'describe' ? 'selected' : ''}" data-description="describe">Describe</button><button class="choice ${state.description === 'classify' ? 'selected' : ''}" data-description="classify">Classify</button></div></div></div><div class="quote-panel"><blockquote>${state.description === 'classify' ? '“Not all the Gardens of boasted Italy can produce a Shade to out-vie this”' : '“about half the length of the Mall here”'}</blockquote><cite>European reference points give Surinam a readable scale.</cite></div></div>`);
-      if (s.key === 'encounter') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">When the gaze <em>turns back</em></h2><p class="lede">The contact zone is not a one-way window. Indigenous curiosity makes Europeans visible too—but reciprocity does not erase unequal power.</p><div class="reverse-stage ${state.reversed ? 'reversed' : ''}"><div class="reverse-side europe"><span>European visitor</span><strong>Looking outward</strong></div><div class="reverse-side indigenous"><span>Indigenous observers</span><strong>Looking back</strong></div></div><div class="hero-actions" style="margin-top:22px"><button class="solid-btn" data-reverse>${state.reversed ? 'Restore the first view' : 'Reverse the gaze'} <span aria-hidden="true">↔</span></button><span class="microcopy">The narration remains mediated.</span></div><div class="quote-panel"><blockquote>“The encounter is reciprocal. Its final interpretation remains controlled by the narrator.”</blockquote><cite>After Pratt’s contact-zone model</cite></div></div>`);
-      if (s.key === 'position') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">A narrator between <em>frameworks</em></h2><p class="lede">Behn can challenge one hierarchy while remaining within another. Activate both frames to see the tension rather than resolve it.</p><div class="frames">${[['gender', 'Gender and authorship', 'A woman writer unsettles the exclusivity of masculine travel authority.'], ['europe', 'Europe and representation', 'Colonial subjects are still interpreted through a European cultural frame.']].map(x => `<button class="frame ${state.position.has(x[0]) ? 'active' : ''}" data-position="${x[0]}"><h3>${x[1]}</h3><p>${x[2]}</p></button>`).join('')}</div><div class="quote-panel"><blockquote>${state.position.size === 2 ? 'A narrator can challenge one hierarchy while remaining within another.' : 'Select both frames to reveal the tension.'}</blockquote><cite>Position is part of the method, not a footnote.</cite></div></div>`);
-      if (s.key === 'return') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">What the story leaves <em>behind</em></h2><p class="lede">Return to the manuscript. The same conventions that make a world visible also shape what can be known, remembered, and believed.</p><div class="final-grid">${[['Authority', 'Who is entitled to speak?'], ['Knowledge', 'How does description make a world knowable?'], ['Representation', 'Whose perspective shapes what remains?']].map((x, i) => `<button class="final-card" data-go="${i + 3}"><h3>${x[0]}</h3><p>${x[1]}</p></button>`).join('')}</div><div class="quote-panel"><blockquote>Travel-writing conventions help Oroonoko establish authority, construct colonial knowledge, and expose the tensions of cultural encounter.</blockquote><cite>End of presentation · Oroonoko by Aphra Behn</cite></div><p class="hint" style="margin-top:32px">Press Home to return to the opening question.</p></div>`);
+      if (s.key === 'authority') {
+        const openedAuthority = authoritySteps.filter(step => state.authoritySteps.has(step[0]));
+        const activeQuote = openedAuthority.length ? openedAuthority[openedAuthority.length - 1] : null;
+        const isActive = key => state.authoritySteps.has(key);
+        const lineClass = key => isActive(key) ? 'active' : '';
+        const reading = activeQuote ? `<strong>${activeQuote[3]}</strong><br>${activeQuote[4]}` : 'Select one basis. The manuscript will reveal where that claim enters the record.';
+        const basisCards = authoritySteps.map((x, i) => `<button class="basis-card ${isActive(x[0]) ? 'active' : ''}" data-authority="${x[0]}" aria-pressed="${isActive(x[0])}"><b>${i + 1}</b><strong>${x[1]}</strong><span>${i === 0 ? 'On-site presence becomes proof.' : i === 1 ? 'A promise of truth resists invention.' : 'A missing history needs a custodian.'}</span></button>`).join('');
+        const tensionPanel = state.authorityTension ? `<div class="tension-panel-compact"><article><small>A claim of modesty</small><h4>Gender looks like a limit.</h4><p>It sounds apologetic inside male-centred authorship.</p></article><article><small>A claim to preserve history</small><h4>Gender becomes a resource.</h4><p>She keeps what official history leaves out.</p></article></div>` : '';
+        html = shell(`<div class="authority-page"><header class="authority-header"><div><div class="eyebrow">${s.label} · CASES 01—02</div><h2 class="authority-title">How does a witness become <em>authoritative?</em></h2></div><div class="authority-question">What makes a narrator credible?<small>Follow the claims attached to “I”</small></div></header><div class="authority-body"><section class="witness-portrait"><div class="constellation"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="orbit-link ${lineClass('presence')}" d="M50 49 L17 21"/><path class="orbit-link ${lineClass('testimony')}" d="M50 49 L83 21"/><path class="orbit-link ${lineClass('archive')}" d="M50 53 L50 86"/></svg><div class="witness-core-mark"><strong>I</strong><span>first-person voice</span></div><button class="orbit-node orbit-presence ${isActive('presence') ? 'active' : ''}" data-authority="presence"><strong>Presence</strong><small>being there</small></button><button class="orbit-node orbit-testimony ${isActive('testimony') ? 'active' : ''}" data-authority="testimony"><strong>Testimony</strong><small>claiming truth</small></button><button class="orbit-node orbit-authority ${isActive('archive') ? 'active' : ''}" data-authority="archive"><strong>Authority</strong><small>preserving a story</small></button></div><p class="portrait-caption">The narrative <em>“I”</em> is an instrument: it turns a scene into testimony, then turns testimony into a place in history.</p></section><section class="authority-board"><div class="board-label"><span>Witness record</span><span>${openedAuthority.length} / 3 layers open</span></div><div class="basis-grid">${basisCards}</div><div class="authority-reading-compact">${reading}</div><div class="archive-mini"><div class="archive-slot"><div class="archive-mini-file"><small>folio 14</small><strong>Voyage</strong></div><div class="archive-mini-file"><small>folio 15</small><strong>Surinam</strong></div><div class="archive-mini-file empty ${isActive('archive') ? 'filled' : ''}"><small>folio 16</small><strong>${isActive('archive') ? 'Oroonoko' : 'empty slot'}</strong></div><div class="archive-mini-file"><small>folio 17</small><strong>Aftermath</strong></div></div><button class="tension-button-compact ${state.authorityTension ? 'active' : ''}" data-authority="__tension">${state.authorityTension ? 'Close tension' : 'Read the tension'}<br><span>“only a female pen”</span></button></div>${tensionPanel}<div class="authority-conclusion-compact">The presentation reads gender as both a constraint and a source of authority.</div></section></div></div>`, 'authority-scene');
+      }
+      if (s.key === 'description') {
+        const phase = state.description;
+        const phaseCopy = {
+          observe: ['Look before you name it.', 'The scene is still open. A moving eye passes over trees, animals, and the work of people without pretending it has already become a system.', 'Nothing sorted yet'],
+          describe: ['Put experience into words.', 'Edges acquire language. Description creates the impression of direct observation while selecting what can be carried home.', 'Descriptive phrases entering the folio'],
+          classify: ['Turn details into a record.', 'The phrases become entries. Classification makes the unfamiliar legible, but the order still belongs to the narrator.', 'A catalogue shaped by the observer']
+        }[phase];
+        const comparison = state.descriptionCompare ? 'revealed' : '';
+        html = shell(`<div class="description-page"><header class="description-header"><div><div class="eyebrow">${s.label} · CASES 03—04</div><h2 class="description-title">How does a landscape become <em>knowledge?</em></h2></div><div class="description-question">What does the narrator do to a place?<small>Watch the scene acquire a grammar</small></div></header><div class="description-main"><section class="field-card"><div class="field-view ${phase}"><span class="scan-beam"></span><span class="field-marker marker-flora"><span>flora / broad leaves</span></span><span class="field-marker marker-animals"><span>animal life / movement</span></span><span class="field-marker marker-residents"><span>residents / activity</span></span><div class="field-note">${phaseCopy[2]}<span>${phase === 'observe' ? 'The eye is moving.' : phase === 'describe' ? 'Language makes a selection.' : 'Order makes a knowledge object.'}</span></div></div></section><section class="script-card"><div class="script-label"><span>Field protocol</span><span>03 stages</span></div><div class="stage-controls"><button class="stage-control ${phase === 'observe' ? 'active' : ''}" data-description="observe"><b>01</b><strong>Observe</strong></button><button class="stage-control ${phase === 'describe' ? 'active' : ''}" data-description="describe"><b>02</b><strong>Describe</strong></button><button class="stage-control ${phase === 'classify' ? 'active' : ''}" data-description="classify"><b>03</b><strong>Classify</strong></button></div><div class="script-reading"><h3>${phaseCopy[0]}</h3><p>${phaseCopy[1]}</p></div><div class="manuscript-strip"><small>Manuscript / working line</small><p>${phase === 'observe' ? '“A country of abundance…”' : phase === 'describe' ? '“the trees, the waters, the people…”' : '<span>01</span> flora · <span>02</span> animal life · <span>03</span> local activity'}</p></div></section></div><section class="comparison-card ${comparison}"><div class="compare-view colony"><span>Surinam / observed</span><div class="scale-line"></div></div><div class="compare-copy"><small>${state.descriptionCompare ? 'A familiar measure enters the frame' : 'The next lens'}</small>${state.descriptionCompare ? '<blockquote>“about half the length of the Mall here”</blockquote><blockquote>“Not all the Gardens of boasted Italy can produce a Shade to out-vie this”</blockquote><cite>The Mall · London · Italian gardens</cite>' : '<blockquote>A place becomes readable through relation.</blockquote><cite>Reveal the comparison to continue.</cite>'}</div><div class="compare-view europe"><span>European reference</span><div class="scale-line"></div></div><button class="compare-action" data-compare>${state.descriptionCompare ? 'Hide comparison' : 'Reveal the comparison'}<br><span>${state.descriptionCompare ? 'metaphorical scale' : 'open lens ↗'}</span></button><div class="comparison-note">The measure is a metaphor, not a historical survey.</div></section><div class="description-conclusion"><strong>Description makes a place intelligible through a cultural frame.</strong></div></div>`, 'description-scene');
+      }
+      if (s.key === 'encounter') {
+        const overlay = state.encounterMediation ? `<div class="encounter-overlay"><div><blockquote>The encounter is reciprocal. Its narration remains mediated.</blockquote><p>We still receive these reactions through the European narrator.</p></div></div>` : '';
+        html = shell(`<div class="encounter-page"><header class="encounter-header"><div><div class="eyebrow">${s.label} · CASE 05</div><h2 class="encounter-title">When the viewer is <em>watched</em></h2></div><div class="encounter-question-head">Can looking back change the frame?<small>Reciprocity is not equality</small></div></header><div class="encounter-body"><section class="encounter-stage"><div class="encounter-canvas ${state.reversed ? 'reversed' : ''}"><div class="encounter-half europe-half"><span class="gaze-mark"></span></div><div class="encounter-half local-half"><span class="gaze-mark"></span></div><div class="encounter-center-label">${state.reversed ? 'local eyes / visitors in frame' : 'European eyes / looking outward'}</div></div><div class="encounter-stage-caption"><span><strong>${state.reversed ? 'The gaze turns back.' : 'A one-way composition.'}</strong> The same encounter, re-centred.</span></div><div class="encounter-controls"><button class="reverse-action" data-reverse>${state.reversed ? 'Restore the first view' : 'Reverse the gaze'} ↔</button></div>${overlay}</section><aside class="encounter-logic"><div class="logic-label">Contact zone / co-presence</div><h3>${state.reversed ? 'Europeans are now inside the picture.' : 'Europeans begin by looking outward.'}</h3><p>${state.reversed ? 'The composition makes Indigenous curiosity visible and makes the visitors visible as objects of attention. No invented dialogue is needed.' : 'The first composition gives the visitor the visual centre. Local residents occupy the field being described.'}</p><div class="logic-question">Does looking back mean having equal power?</div><button class="mediation-action ${state.encounterMediation ? 'active' : ''}" data-mediation>${state.encounterMediation ? 'Close the manuscript' : 'Not necessarily'} <span aria-hidden="true">↗</span></button></aside></div><div class="encounter-footer"><strong>The encounter can be reciprocal.</strong> Its final interpretation still passes through the narrator.</div></div>`, 'encounter-scene');
+      }
+      if (s.key === 'position') {
+        const both = state.position.size === 2;
+        const genderOpen = state.position.has('gender');
+        const europeOpen = state.position.has('europe');
+        html = shell(`<div class="position-page"><header class="position-header"><div><div class="eyebrow">${s.label} · ACROSS THE CASES</div><h2 class="position-title">Where does <em>Behn</em> stand?</h2></div><div class="position-question-head">Can a narrator move a hierarchy from inside it?<small>Hold both frames at once</small></div></header><div class="position-body"><section class="position-map"><div class="framework-orbit ${genderOpen ? 'active' : ''}"><span class="orbit-caption">Gender and<br>Authorship</span></div><div class="framework-orbit europe-orbit ${europeOpen ? 'active' : ''}"><span class="orbit-caption">Europe and Colonial<br>Representation</span></div><div class="behn-core"><strong>APHRA<br>BEHN</strong><small>${both ? 'at the intersection' : 'select a frame'}</small></div></section><section class="position-frameworks"><header><span>Two operating frames</span><span>${state.position.size} / 2 open</span></header><div class="framework-list"><button class="framework-card ${genderOpen ? 'active' : ''}" data-position="gender"><small>Frame 01</small><h3>Gender and Authorship</h3><p>${genderOpen ? 'A woman writer unsettles the exclusivity of masculine travel authority.' : 'Open to examine who is allowed to sound like a traveller.'}</p></button><button class="framework-card europe-card ${europeOpen ? 'active' : ''}" data-position="europe"><small>Frame 02</small><h3>Europe and Colonial Representation</h3><p>${europeOpen ? 'Colonial subjects are still interpreted through a European cultural frame.' : 'Open to examine the standards used to explain the unfamiliar.'}</p></button></div><div class="position-reading">${both ? '<strong>A narrator can challenge one hierarchy while remaining within another.</strong>' : 'Open both frames to let the contradiction stay visible.'}</div></section></div><div class="position-footer">Position is part of the method, not a footnote.</div></div>`, 'position-scene');
+      }
+      if (s.key === 'return') {
+        const focus = state.returnAssembled ? 'all' : state.returnFocus;
+        const themeActive = key => state.returnAssembled || state.returnFocus === key ? 'active' : '';
+        const returnDetails = {
+          authority: "<strong>Authority</strong><p>The first-person ‘I’ becomes credible through presence, testimony, and the promise to preserve an otherwise unrecorded story.</p><button class='return-jump' data-go='3'>Revisit scene 04 ↗</button>",
+          knowledge: "<strong>Knowledge</strong><p>Description turns a place into something legible by selecting details, ordering them, and measuring the unfamiliar through a cultural frame.</p><button class='return-jump' data-go='4'>Revisit scene 05 ↗</button>",
+          representation: "<strong>Representation</strong><p>The encounter can be reciprocal while its surviving account remains mediated by the European narrator’s point of view.</p><button class='return-jump' data-go='5'>Revisit scene 06 ↗</button>"
+        };
+        const detail = state.returnAssembled ? "<strong>The argument is assembled.</strong><p>Travel-writing conventions establish authority, construct colonial knowledge, and expose the tensions of cultural encounter. The three themes are connected, but the frame still belongs to a narrator.</p>" : focus ? returnDetails[focus] : "<strong>Choose a fragment of the folio.</strong><p>Each theme activates the evidence it gathers. Assemble all three when you are ready to see the whole argument.</p>";
+        html = shell(`<div class="return-page"><header class="return-header"><div><div class="eyebrow">${s.label} · FINAL FOLIO</div><h2 class="return-title">Return to the <em>page</em></h2></div><div class="return-question-head">What does the story leave behind?<small>Reassemble the argument from its surviving traces</small></div></header><div class="return-body"><section class="return-manuscript"><div class="return-folio-head"><span>Final folio / reassembly</span><span>${state.returnAssembled ? 'argument complete' : '04 traces waiting'}</span></div><div class="return-folio-title">Oroonoko / a working history<small>Choose a theme or drag the geometry to shift the reading</small></div><div class="return-archive-map ${state.returnAssembled ? 'assembled' : ''}" style="--balance:${state.returnBalance};--depth:${state.returnDepth}"><div class="return-route-line"></div><div class="return-geometry" aria-hidden="true"><span class="geo-axis"></span></div><button class="return-token route ${themeActive('knowledge')}" data-return-theme="knowledge">route / Surinam</button><button class="return-token quote ${themeActive('authority')}" data-return-theme="authority">“only a female pen”</button><button class="return-token flora ${themeActive('knowledge')}" data-return-theme="knowledge">flora / description</button><button class="return-token gaze ${themeActive('representation')}" data-return-theme="representation">gaze / contact zone</button><div class="return-seal"><strong>OROONOKO</strong><small>final folio</small></div></div><p>The page keeps the marks of movement, comparison, observation, and encounter. None arrives without a narrator.</p></section><section class="return-themes"><header><span>Three questions to carry forward</span><span>${state.returnAssembled ? '03 / 03 connected' : `${state.returnFocus ? '01' : '00'} / 03 selected`}</span></header><div class="return-theme-list"><button class="theme-card ${themeActive('authority')}" data-return-theme="authority"><span class="theme-index">01</span><span><small>Voice / authority</small><h3>Authority</h3><p>Who is entitled to speak?</p></span><i>↗</i></button><button class="theme-card ${themeActive('knowledge')}" data-return-theme="knowledge"><span class="theme-index">02</span><span><small>Method / knowledge</small><h3>Knowledge</h3><p>How does description make a world knowable?</p></span><i>↗</i></button><button class="theme-card ${themeActive('representation')}" data-return-theme="representation"><span class="theme-index">03</span><span><small>Frame / representation</small><h3>Representation</h3><p>Whose perspective shapes what remains?</p></span><i>↗</i></button></div><div class="return-theme-detail">${detail}</div><div class="return-lab"><div class="return-lab-head"><span>Adjust the reading frame</span><span>drag the geometry</span></div><label class="return-range"><span>Voice ↔ archive</span><input type="range" min="0" max="100" value="${state.returnBalance}" data-return-range="balance"><output data-range-value="balance">${state.returnBalance}% voice</output></label><label class="return-range"><span>Observation ↔ encounter</span><input type="range" min="0" max="100" value="${state.returnDepth}" data-return-range="depth"><output data-range-value="depth">${state.returnDepth}% encounter</output></label></div><button class="return-assemble ${state.returnAssembled ? 'active' : ''}" data-return-assemble>${state.returnAssembled ? 'Reset the folio' : 'Assemble the argument'}<span>${state.returnAssembled ? 'start again ↺' : 'trace all three ↗'}</span></button></section></div><div class="return-bottom"><div class="return-conclusion">Travel-writing conventions help Oroonoko establish authority, construct colonial knowledge, and expose the tensions of cultural encounter.</div><div class="return-question-panel"><p>When we read a description of another world, what should we ask about the person describing it?</p><div class="return-question-options"><button class="return-question-chip ${themeActive('authority')}" data-return-question="authority">Who speaks?</button><button class="return-question-chip ${themeActive('knowledge')}" data-return-question="knowledge">What becomes knowledge?</button><button class="return-question-chip ${themeActive('representation')}" data-return-question="representation">Who remains?</button></div></div></div></div>`, 'return-scene');
+      }
       stage.innerHTML = html;
       nav();
       bindScene();
@@ -345,10 +1068,31 @@
       if (button.hasAttribute('data-zone') && state.activeBoundaryFeature !== null) return placeBoundaryFeature(state.activeBoundaryFeature, button.dataset.zone);
       if (button.hasAttribute('data-condition')) { const i = Number(button.dataset.condition); state.conditions.has(i) ? state.conditions.delete(i) : state.conditions.add(i); return render(false); }
       if (button.hasAttribute('data-boundary')) { const i = Number(button.dataset.boundary); state.boundaries.has(i) ? state.boundaries.delete(i) : state.boundaries.add(i); return render(false); }
-      if (button.hasAttribute('data-authority')) { state.authority = button.dataset.authority; return render(false); }
+      if (button.hasAttribute('data-authority')) { const key = button.dataset.authority; if (key === '__tension') { state.authorityTension = !state.authorityTension; return render(false); } state.authoritySteps.has(key) ? state.authoritySteps.delete(key) : state.authoritySteps.add(key); return render(false); }
+      if (button.hasAttribute('data-tension')) { state.authorityTension = !state.authorityTension; return render(false); }
       if (button.hasAttribute('data-description')) { state.description = button.dataset.description; return render(false); }
+      if (button.hasAttribute('data-compare')) { state.descriptionCompare = !state.descriptionCompare; return render(false); }
       if (button.hasAttribute('data-reverse')) { state.reversed = !state.reversed; return render(false); }
+      if (button.hasAttribute('data-mediation')) { state.encounterMediation = !state.encounterMediation; return render(false); }
       if (button.hasAttribute('data-position')) { const key = button.dataset.position; state.position.has(key) ? state.position.delete(key) : state.position.add(key); return render(false); }
+      if (button.hasAttribute('data-return-theme')) { const key = button.dataset.returnTheme; state.returnFocus = state.returnFocus === key ? null : key; state.returnAssembled = false; return render(false); }
+      if (button.hasAttribute('data-return-question')) { state.returnFocus = button.dataset.returnQuestion; state.returnAssembled = false; return render(false); }
+      if (button.hasAttribute('data-return-assemble')) { state.returnAssembled = !state.returnAssembled; if (state.returnAssembled) state.returnFocus = null; return render(false); }
+    });
+    stage.addEventListener('input', event => {
+      const input = event.target.closest('[data-return-range]');
+      if (!input) return;
+      const key = input.dataset.returnRange === 'balance' ? 'returnBalance' : 'returnDepth';
+      state[key] = Number(input.value);
+      const map = stage.querySelector('.return-archive-map');
+      if (map) {
+        map.style.setProperty('--balance', state.returnBalance);
+        map.style.setProperty('--depth', state.returnDepth);
+        const coreLabel = map.querySelector('.geo-core strong');
+        if (coreLabel) coreLabel.textContent = state.returnBalance > 60 ? 'VOICE' : state.returnDepth > 60 ? 'CONTACT' : 'FRAME';
+      }
+      const output = stage.querySelector(`[data-range-value="${input.dataset.returnRange}"]`);
+      if (output) output.textContent = `${state[key]}% ${input.dataset.returnRange === 'balance' ? 'voice' : 'encounter'}`;
     });
     function go(index) { current = Math.max(0, Math.min(scenes.length - 1, index)); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); stage.focus({ preventScroll: true }); closeEvidence(); }
     function openEvidence() { const s = scenes[current]; evidenceTitle.textContent = `${s.label} · Evidence layer`; evidenceText.textContent = s.evidence; evidenceDrawer.classList.add('open'); }
