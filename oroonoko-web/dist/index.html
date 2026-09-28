@@ -125,6 +125,46 @@
     .frame.active { border-color: var(--copper); box-shadow: 0 0 0 1px rgba(213,139,82,.2) inset; }
     .frame h3 { font: 500 21px Georgia, serif; margin: 0 0 10px; }
     .frame p { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0; }
+    .genre-lab { max-width: 900px; margin-top: 26px; border: 1px solid rgba(213,139,82,.34); border-radius: 15px; overflow: hidden; background: linear-gradient(140deg, rgba(213,139,82,.08), rgba(255,255,255,.02)); }
+    .genre-lab-head { display: flex; justify-content: space-between; gap: 18px; padding: 13px 18px; border-bottom: 1px solid var(--line); color: var(--copper-soft); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+    .genre-lab-body { padding: 18px 20px 20px; }
+    .genre-lab-intro { margin: 0 0 16px; color: #c4cece; font: italic 17px/1.45 Georgia, serif; }
+    .genre-trace { display: grid; gap: 9px; }
+    .genre-trace-row { display: grid; grid-template-columns: minmax(150px, .9fr) minmax(100px, .6fr) minmax(0, 1.7fr); gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.1); animation: enter .4s ease both; }
+    .genre-trace-row strong { color: #f0c28e; font: 500 16px Georgia, serif; }
+    .genre-trace-row .trace-tag { color: var(--green); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; }
+    .genre-trace-row span:last-child { color: #aebbbc; font: 14px/1.45 Georgia, serif; }
+    .genre-empty { margin: 0; color: var(--muted); font-size: 13px; }
+    .genre-board { margin-top: 28px; border: 1px solid rgba(213,139,82,.34); border-radius: 15px; background: linear-gradient(140deg, rgba(213,139,82,.08), rgba(255,255,255,.02)); overflow: hidden; }
+    .genre-board-head { display: flex; justify-content: space-between; gap: 18px; padding: 13px 18px; border-bottom: 1px solid var(--line); color: var(--copper-soft); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
+    .genre-board-body { padding: 20px; }
+    .genre-instruction { margin: 0 0 16px; color: #c4cece; font: italic 17px/1.45 Georgia, serif; }
+    .zone-scroll { overflow-x: auto; padding: 0 0 10px; }
+    .zone-canvas { position: relative; min-width: 730px; height: 292px; }
+    .genre-zone { appearance: none; position: absolute; width: 278px; height: 278px; border-radius: 50%; padding: 34px 28px 25px; border: 1px solid rgba(255,255,255,.34); color: var(--ink); cursor: pointer; transition: .25s ease; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .genre-zone:hover, .genre-zone.drop-ready { border-color: var(--copper-soft); background-color: rgba(213,139,82,.2); }
+    .genre-zone.active-target { box-shadow: 0 0 0 2px var(--copper) inset, 0 0 30px rgba(213,139,82,.2); }
+    .zone-documentary { left: 0; top: 8px; background: rgba(73, 126, 128, .27); }
+    .zone-travel { left: 226px; top: 8px; background: rgba(213, 139, 82, .2); }
+    .zone-fiction { left: 452px; top: 8px; background: rgba(104, 92, 152, .27); }
+    .genre-zone h3 { margin: 0; font: 500 18px Georgia, serif; }
+    .genre-zone small { margin-top: 6px; color: #bac5c4; font-size: 11px; }
+    .zone-tokens { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-top: 18px; }
+    .zone-token { border: 1px solid rgba(255,255,255,.33); border-radius: 999px; padding: 5px 8px; color: #fff0d4; background: rgba(8,17,29,.38); font-size: 10px; }
+    .feature-deck { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 17px; }
+    .feature-card { appearance: none; min-height: 64px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 11px; color: var(--muted); background: rgba(255,255,255,.035); cursor: grab; text-align: left; transition: .2s ease; }
+    .feature-card:hover, .feature-card:focus-visible, .feature-card.focused { color: var(--ink); border-color: var(--copper); background: rgba(213,139,82,.12); transform: translateY(-2px); }
+    .feature-card:active { cursor: grabbing; }
+    .feature-card strong { display: block; color: #f0c28e; font-size: 12px; margin-bottom: 4px; }
+    .feature-card span { display: block; font-size: 10px; line-height: 1.35; }
+    .connection-note { margin-top: 17px; padding: 16px 18px; border-left: 2px solid var(--copper); background: rgba(8,17,29,.28); }
+    .connection-note strong { display: block; color: #fff0d4; font: italic 19px Georgia, serif; }
+    .connection-note p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .connection-list { display: grid; gap: 7px; margin-top: 12px; }
+    .connection-row { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; color: #c1cbca; font-size: 11px; }
+    .connection-row strong { font: 500 13px Georgia, serif; color: #f0c28e; }
+    .connection-row .pill { padding: 4px 7px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; color: #cbd5d0; }
+    .connection-row .line { width: 26px; height: 1px; background: var(--copper); }
     .final-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 34px 0 34px; }
     .final-card { padding: 22px; border-top: 1px solid var(--copper); background: linear-gradient(180deg, rgba(213,139,82,.1), transparent); cursor: pointer; transition: .25s ease; }
     .final-card:hover { background: linear-gradient(180deg, rgba(213,139,82,.2), transparent); transform: translateY(-3px); }
@@ -169,6 +209,8 @@
       .reverse-stage.reversed .europe { opacity: .25; }
       blockquote { font-size: 20px; }
       h2 { font-size: 52px; }
+      .feature-deck { grid-template-columns: 1fr 1fr; }
+      .genre-board-body { padding: 15px; }
     }
   </style>
 </head>
@@ -204,7 +246,14 @@
       { key: 'return', short: 'Return', title: 'What the story leaves behind', label: '07 · Significance', evidence: 'The final claim is that travel-writing conventions help Oroonoko establish narrative authority, construct colonial knowledge, and expose the tensions of cultural encounter.' }
     ];
     let current = 0;
-    const state = { conditions: new Set(), boundaries: new Set(), authority: 'presence', description: 'observe', reversed: false, position: new Set(['gender', 'europe']) };
+    const boundaryFeatures = [
+      ['First-person narration', 'voice', 'A traveller’s “I” can sound like testimony, while a novelist can use the same voice to stage a world.'],
+      ['Eyewitness claims', 'authority', 'The promise of having been there can support documentary rhetoric and fictional verisimilitude alike.'],
+      ['Detailed description', 'observation', 'A catalogue of detail turns experience into knowledge, whether the scene is reported or shaped.'],
+      ['Movement through places', 'sequence', 'A route can record a journey and also provide the structure of a story.']
+    ];
+    const boundaryZones = ['documentary', 'travel', 'fiction'];
+    const state = { conditions: new Set(), boundaries: new Set(), boundaryPlacements: boundaryFeatures.map(() => new Set()), activeBoundaryFeature: null, authority: 'presence', description: 'observe', reversed: false, position: new Set(['gender', 'europe']) };
     const stage = document.getElementById('stage');
     const sceneList = document.getElementById('sceneList');
     const progressBar = document.getElementById('progressBar');
@@ -236,7 +285,19 @@
         const opened = threads.filter((_, i) => state.conditions.has(i));
         html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">How did travel become <em>knowledge?</em></h2><p class="lede">Eighteenth-century travel writing flourished when four cultural shifts began to reinforce one another. Activate each thread and watch the manuscript fill in.</p><div class="grid-4">${threads.map((x, i) => `<button class="card ${state.conditions.has(i) ? 'selected' : ''}" data-condition="${i}" aria-pressed="${state.conditions.has(i)}"><span class="icon">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></button>`).join('')}</div><div class="result-line">${state.conditions.size === 4 ? 'The folio is complete: travel became a way of producing knowledge.' : `${state.conditions.size} of 4 threads opened · click another card to continue`}</div><div class="manuscript"><div class="manuscript-head"><span>Manuscript folio</span><span>${opened.length} / 4 passages opened</span></div><div class="manuscript-body"><p class="manuscript-intro">${opened.length ? 'Each activated thread adds a line to the historical record.' : 'The page is waiting. Click a thread above to add its account.'}</p>${opened.length ? opened.map(x => `<div class="folio-line"><div><strong>${x[1]}</strong><span>${x[3]}</span></div></div>`).join('') : '<p class="folio-empty">No passage has been opened yet.</p>'}</div></div></div>`);
       }
-      if (s.key === 'boundaries') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Where does a <em>genre</em> begin?</h2><p class="lede">The boundary between travel narrative and fiction is porous. Place each technique where it seems to belong—then see why the categories overlap.</p><div class="choice-row">${['First-person narration', 'Eyewitness claims', 'Detailed description', 'Movement through places'].map((x, i) => `<button class="choice ${state.boundaries.has(i) ? 'selected' : ''}" data-boundary="${i}">${x}</button>`).join('')}</div><div class="frames"><div class="frame ${state.boundaries.size >= 2 ? 'active' : ''}"><h3>Documentary record</h3><p>Observation, evidence, sequence. A promise that the world has been encountered.</p></div><div class="frame ${state.boundaries.size >= 2 ? 'active' : ''}"><h3>Travel narrative / fiction</h3><p>Voice, movement, scene. A promise that the account can be shaped into a story.</p></div></div><div class="quote-panel"><blockquote>Instead of asking what travel writing is, ask what it does.</blockquote><cite>A characteristic-based approach · after Borm, Hulme & Youngs, Thompson, and Pratt</cite></div></div>`);
+      if (s.key === 'boundaries') {
+        const placedCount = state.boundaryPlacements.filter(placements => placements.size > 0).length;
+        const sharedFeatures = state.boundaryPlacements.map((placements, i) => ({ placements, i })).filter(item => item.placements.size > 1);
+        const zoneMarkup = boundaryZones.map(zone => {
+          const zoneLabel = zone === 'documentary' ? 'Documentary Record' : zone === 'travel' ? 'Travel Narrative' : 'Fiction';
+          const zoneSub = zone === 'documentary' ? 'observation · evidence · sequence' : zone === 'travel' ? 'the shared territory' : 'voice · movement · scene';
+          const tokens = boundaryFeatures.map((feature, i) => state.boundaryPlacements[i].has(zone) ? `<span class="zone-token">${feature[0]}</span>` : '').join('');
+          return `<button class="genre-zone zone-${zone} ${state.activeBoundaryFeature !== null ? 'active-target' : ''}" data-zone="${zone}" aria-label="Place the selected feature in ${zoneLabel}"><h3>${zoneLabel}</h3><small>${zoneSub}</small><span class="zone-tokens">${tokens || '<span class="zone-token" style="opacity:.55">drop a card here</span>'}</span></button>`;
+        }).join('');
+        const featureMarkup = boundaryFeatures.map((feature, i) => `<button class="feature-card ${state.activeBoundaryFeature === i ? 'focused' : ''}" draggable="true" data-feature="${i}" aria-pressed="${state.activeBoundaryFeature === i}"><strong>${feature[0]}</strong><span>drag to one or more circles · ${feature[1]}</span></button>`).join('');
+        const connectionMarkup = sharedFeatures.length ? sharedFeatures.map(({ placements, i }) => `<div class="connection-row"><strong>${boundaryFeatures[i][0]}</strong>${Array.from(placements).map((zone, index) => `${index ? '<span class="line"></span>' : ''}<span class="pill">${zone === 'documentary' ? 'Documentary Record' : zone === 'travel' ? 'Travel Narrative' : 'Fiction'}</span>`).join('')}</div>`).join('') : '<p class="genre-empty">Place a card in two circles to reveal its shared connection.</p>';
+        html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Where does a <em>genre</em> begin?</h2><p class="lede">Travel writing and fiction share techniques. Drag each card into one or more overlapping regions and watch the boundary become difficult to draw.</p><div class="genre-board"><div class="genre-board-head"><span>Genre overlap map</span><span>${placedCount} / 4 cards placed</span></div><div class="genre-board-body"><p class="genre-instruction">Drag a card onto a circle. For keyboard or touch, click a card to select it, then click a circle.</p><div class="zone-scroll"><div class="zone-canvas">${zoneMarkup}</div></div><div class="feature-deck">${featureMarkup}</div><div class="connection-note"><strong>Shared techniques make fixed boundaries difficult.</strong><p>${sharedFeatures.length ? 'The lines show where one device belongs to more than one narrative mode.' : 'The shared territory will appear when a card is placed in more than one region.'}</p><div class="connection-list">${connectionMarkup}</div></div></div></div><div class="quote-panel"><blockquote>Instead of asking what travel writing is, ask what it does.</blockquote><cite>A characteristic-based approach · after Borm, Hulme & Youngs, Thompson, and Pratt</cite></div></div>`);
+      }
       if (s.key === 'authority') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">Who gets to be a <em>witness?</em></h2><p class="lede">In Oroonoko, the narrator’s “I” works as an authority marker. Select a link in the chain to see how credibility is staged.</p><div class="chain">${[['presence', 'Being there', 'on-site presence'], ['testimony', 'Claiming truth', 'firsthand observation'], ['archive', 'Preserving a story', 'a history left out']].map(x => `<button class="chain-step ${state.authority === x[0] ? 'active' : ''}" data-authority="${x[0]}"><strong>${x[1]}</strong><small>${x[2]}</small></button>`).join('')}</div><div class="quote-panel"><blockquote>${state.authority === 'archive' ? '“only a female pen”' : state.authority === 'testimony' ? '“Truth” rather than fabricated adventures' : 'The narrator’s physical presence in Surinam'}</blockquote><cite>${state.authority === 'archive' ? 'A modest phrase with a double edge.' : state.authority === 'testimony' ? 'A claim that sounds like travel-writing authority.' : 'Presence becomes proof.'}</cite></div><div class="tension"><div><strong>A constraint</strong>Female authorship can appear to weaken authority within a male-centred literary culture.</div><div><strong>A resource</strong>That same position lets Behn preserve a story missing from official history.</div></div></div>`);
       if (s.key === 'description') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">When a landscape becomes <em>knowledge</em></h2><p class="lede">Observe, describe, classify. The sequence makes visible how a foreign environment is translated into an intelligible account.</p><div class="observe-stage"><div class="landscape ${state.description === 'observe' ? 'observing' : ''} ${state.description === 'classify' ? 'classified' : ''}" aria-label="Stylized Surinam landscape"><span class="tag one">flora</span><span class="tag two">local custom</span><span class="tag three">natural resource</span></div><div class="step-copy"><h3>${state.description === 'observe' ? 'Look closely.' : state.description === 'describe' ? 'Put experience into words.' : 'Turn details into a system.'}</h3><p>${state.description === 'observe' ? 'The scene is still a scene. Nothing has been sorted yet.' : state.description === 'describe' ? 'Description creates the impression of direct, empirical witness.' : 'Classification makes unfamiliar space legible—but never free from the observer’s frame.'}</p><div class="choice-row"><button class="choice ${state.description === 'observe' ? 'selected' : ''}" data-description="observe">Observe</button><button class="choice ${state.description === 'describe' ? 'selected' : ''}" data-description="describe">Describe</button><button class="choice ${state.description === 'classify' ? 'selected' : ''}" data-description="classify">Classify</button></div></div></div><div class="quote-panel"><blockquote>${state.description === 'classify' ? '“Not all the Gardens of boasted Italy can produce a Shade to out-vie this”' : '“about half the length of the Mall here”'}</blockquote><cite>European reference points give Surinam a readable scale.</cite></div></div>`);
       if (s.key === 'encounter') html = shell(`<div class="section-meta"><div class="eyebrow">${s.label}</div><h2 class="section-title">When the gaze <em>turns back</em></h2><p class="lede">The contact zone is not a one-way window. Indigenous curiosity makes Europeans visible too—but reciprocity does not erase unequal power.</p><div class="reverse-stage ${state.reversed ? 'reversed' : ''}"><div class="reverse-side europe"><span>European visitor</span><strong>Looking outward</strong></div><div class="reverse-side indigenous"><span>Indigenous observers</span><strong>Looking back</strong></div></div><div class="hero-actions" style="margin-top:22px"><button class="solid-btn" data-reverse>${state.reversed ? 'Restore the first view' : 'Reverse the gaze'} <span aria-hidden="true">↔</span></button><span class="microcopy">The narration remains mediated.</span></div><div class="quote-panel"><blockquote>“The encounter is reciprocal. Its final interpretation remains controlled by the narrator.”</blockquote><cite>After Pratt’s contact-zone model</cite></div></div>`);
@@ -248,11 +309,40 @@
     }
     function bindScene() {}
     sceneList.addEventListener('click', event => { const button = event.target.closest('[data-go]'); if (button) go(Number(button.dataset.go)); });
+    function placeBoundaryFeature(featureIndex, zone) {
+      if (!Number.isInteger(featureIndex) || !boundaryZones.includes(zone)) return;
+      const placements = state.boundaryPlacements[featureIndex];
+      placements.has(zone) ? placements.delete(zone) : placements.add(zone);
+      state.activeBoundaryFeature = featureIndex;
+      render(false);
+    }
+    stage.addEventListener('dragstart', event => {
+      const card = event.target.closest('[data-feature]');
+      if (!card || !event.dataTransfer) return;
+      state.activeBoundaryFeature = Number(card.dataset.feature);
+      event.dataTransfer.effectAllowed = 'copy';
+      event.dataTransfer.setData('text/plain', card.dataset.feature);
+    });
+    stage.addEventListener('dragover', event => {
+      const zone = event.target.closest('[data-zone]');
+      if (!zone) return;
+      event.preventDefault();
+      zone.classList.add('drop-ready');
+    });
+    stage.addEventListener('drop', event => {
+      const zone = event.target.closest('[data-zone]');
+      if (!zone) return;
+      event.preventDefault();
+      const featureIndex = Number(event.dataTransfer?.getData('text/plain'));
+      placeBoundaryFeature(featureIndex, zone.dataset.zone);
+    });
     stage.addEventListener('click', event => {
       const button = event.target.closest('button');
       if (!button) return;
       if (button.hasAttribute('data-next')) return go(current + 1);
       if (button.hasAttribute('data-go')) return go(Number(button.dataset.go));
+      if (button.hasAttribute('data-feature')) { state.activeBoundaryFeature = Number(button.dataset.feature); return render(false); }
+      if (button.hasAttribute('data-zone') && state.activeBoundaryFeature !== null) return placeBoundaryFeature(state.activeBoundaryFeature, button.dataset.zone);
       if (button.hasAttribute('data-condition')) { const i = Number(button.dataset.condition); state.conditions.has(i) ? state.conditions.delete(i) : state.conditions.add(i); return render(false); }
       if (button.hasAttribute('data-boundary')) { const i = Number(button.dataset.boundary); state.boundaries.has(i) ? state.boundaries.delete(i) : state.boundaries.add(i); return render(false); }
       if (button.hasAttribute('data-authority')) { state.authority = button.dataset.authority; return render(false); }
